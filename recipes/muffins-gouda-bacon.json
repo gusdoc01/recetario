@@ -9,39 +9,48 @@
   "ingredients": [
     {
       "name": "Queso gouda, rallado",
-      "amount": "85 g"
+      "amount": "85 g",
+      "id": "gouda"
     },
     {
       "name": "Manzana verde (Granny Smith), rallada",
-      "amount": "50 g"
+      "amount": "50 g",
+      "id": "manzana"
     },
     {
       "name": "Bacon ahumado",
-      "amount": "100 g"
+      "amount": "100 g",
+      "id": "bacon"
     },
     {
       "name": "Harina 0000 (todo uso)",
-      "amount": "360 g"
+      "amount": "360 g",
+      "id": "harina"
     },
     {
       "name": "Polvo de hornear",
-      "amount": "17 g"
+      "amount": "17 g",
+      "id": "polvo-hornear"
     },
     {
       "name": "Azúcar granulada",
-      "amount": "12 g"
+      "amount": "12 g",
+      "id": "azucar"
     },
     {
       "name": "Sal",
-      "amount": "6 g"
+      "amount": "6 g",
+      "id": "sal"
     },
     {
       "name": "Manteca sin sal",
-      "amount": "57 g"
+      "amount": "57 g",
+      "id": "manteca"
     },
     {
       "name": "Cerveza",
-      "amount": "355 cc"
+      "amount": "355 cc",
+      "id": "cerveza"
     }
   ],
   "notes": "Receta traducida y convertida a gramos a partir del original en inglés (\"3 oz Gouda with bacon, smoked\", 375°F). El molde no estaba especificado en el original; se asume uno estándar de 12 cavidades. Conversión: 1 taza de harina = 120 g, 1 cda de polvo de hornear ≈13.8 g, 1 cda de azúcar ≈12.5 g, 1 cdta de sal ≈6 g, 1 cda de manteca ≈14.2 g, 1 taza = 236.6 cc.",
@@ -52,19 +61,36 @@
     },
     {
       "title": "Mezclar los secos",
-      "text": "En un bowl grande, batir juntos la harina, el polvo de hornear y la sal."
+      "text": "En un bowl grande, batir juntos la harina, el polvo de hornear y la sal.",
+      "ingredientRefs": [
+        "harina",
+        "polvo-hornear",
+        "sal"
+      ]
     },
     {
       "title": "Incorporar manzana y queso",
-      "text": "Agregar la manzana y el queso gouda, ambos rallados, y mezclar bien, para que los ingredientes queden dispersos y cubiertos de harina."
+      "text": "Agregar la manzana y el queso gouda, ambos rallados, y mezclar bien, para que los ingredientes queden dispersos y cubiertos de harina.",
+      "ingredientRefs": [
+        "manzana",
+        "gouda"
+      ]
     },
     {
       "title": "Dorar el bacon",
-      "text": "Dorar las tiras de bacon en una sartén, picarlo y agregarlo a los secos."
+      "text": "Dorar las tiras de bacon en una sartén, picarlo y agregarlo a los secos.",
+      "ingredientRefs": [
+        "bacon"
+      ]
     },
     {
       "title": "Sumar azúcar, manteca y cerveza",
-      "text": "Agregar el azúcar, la manteca y la cerveza al bowl."
+      "text": "Agregar el azúcar, la manteca y la cerveza al bowl.",
+      "ingredientRefs": [
+        "azucar",
+        "manteca",
+        "cerveza"
+      ]
     },
     {
       "title": "Unir la masa",
