@@ -716,6 +716,7 @@ muffin: `<svg viewBox="0 0 100 100"><g>
             <button class="timer-btn primary" id="timer-toggle" onclick="toggleTimer(${step.timer})">Empezar</button>
             <button class="timer-btn" onclick="resetTimer(${step.timer})">Reiniciar</button>
           </div>
+          <button class="timer-btn" style="margin-top:8px;width:100%" onclick="startSystemTimer(${step.timer})">⏰ Timer del sistema (Atajos)</button>
         </div>`;
     } else if (step.longStep) {
       extra = `
@@ -853,6 +854,15 @@ muffin: `<svg viewBox="0 0 100 100"><g>
       if (timerRunning) requestWakeLock();
     }
   });
+
+  // Dispara el Atajo "Timer Receta" (creado a mano en la app Atajos) para que
+  // arranque un timer real del sistema — sigue corriendo y avisa aunque se
+  // bloquee la pantalla o se cierre esta pestaña. Requiere iPhone/iPad.
+  function startSystemTimer(totalSeconds) {
+    const shortcutName = encodeURIComponent('Timer Receta');
+    const url = `shortcuts://run-shortcut?name=${shortcutName}&input=text&text=${totalSeconds}`;
+    window.location.href = url;
+  }
 
   function playBeep() {
     try {
