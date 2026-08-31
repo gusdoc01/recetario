@@ -9,34 +9,48 @@
   "ingredients": [
     {
       "name": "Harina 000",
-      "amount": "250 g"
+      "amount": "250 g",
+      "id": "harina-000"
     },
     {
       "name": "Harina 0000",
-      "amount": "250 g"
+      "amount": "250 g",
+      "id": "harina-0000"
     },
     {
       "name": "Agua",
-      "amount": "265 cc"
+      "amount": "265 cc",
+      "id": "agua"
     },
     {
       "name": "Aceite (o grasa)",
-      "amount": "100 cc"
+      "amount": "100 cc",
+      "id": "aceite"
     },
     {
       "name": "Sal",
-      "amount": "10 g"
+      "amount": "10 g",
+      "id": "sal"
     }
   ],
   "notes": "La 000 aporta fuerza y la 0000 elasticidad. No lleva vinagre ni polvo de hornear. Es ideal trabajar de a dos: uno estira y el otro cocina.",
   "steps": [
     {
       "title": "Mezclá harinas y agua",
-      "text": "En un bol poner el agua, la sal y las dos harinas (000 y 0000). Revolver hasta que la masa se despegue del bol."
+      "text": "En un bol poner el agua, la sal y las dos harinas (000 y 0000). Revolver hasta que la masa se despegue del bol.",
+      "ingredientRefs": [
+        "agua",
+        "sal",
+        "harina-000",
+        "harina-0000"
+      ]
     },
     {
       "title": "Amasá",
-      "text": "Pasar la masa a la mesada, agregar el aceite por encima y amasar con ganas. Tener harina adicional a mano por si hace falta ajustar el punto."
+      "text": "Pasar la masa a la mesada, agregar el aceite por encima y amasar con ganas. Tener harina adicional a mano por si hace falta ajustar el punto.",
+      "ingredientRefs": [
+        "aceite"
+      ]
     },
     {
       "title": "Reposo",
