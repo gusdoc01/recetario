@@ -1,0 +1,83 @@
+{
+  "id": "bunuelos-acelga-guerrilla",
+  "icon": "bunuelo2",
+  "title": "Buñuelos de Acelga",
+  "subtitle": "Receta de @LaGuerrillaFood · acelga hervida y picada a cuchillo · fritos",
+  "servings": "1 paquete de acelga (varias porciones)",
+  "time": "Hervor 2-3 min + fritura",
+  "oven": "Frito en abundante aceite caliente",
+  "ingredients": [
+    {
+      "name": "Acelga",
+      "amount": "1 paquete"
+    },
+    {
+      "name": "Huevos",
+      "amount": "6"
+    },
+    {
+      "name": "Avena instantánea",
+      "amount": "100 g"
+    },
+    {
+      "name": "Leche",
+      "amount": "100 cc"
+    },
+    {
+      "name": "Harina 0000 (+ extra para ajustar)",
+      "amount": "200 g"
+    },
+    {
+      "name": "Ajo rallado",
+      "amount": "c/n"
+    },
+    {
+      "name": "Pimienta molida",
+      "amount": "c/n"
+    },
+    {
+      "name": "Ají molido",
+      "amount": "c/n"
+    },
+    {
+      "name": "Sal",
+      "amount": "c/n"
+    },
+    {
+      "name": "Aceite para freír",
+      "amount": "abundante"
+    }
+  ],
+  "notes": "Punto clave: no procesar la acelga, se pica a cuchillo en tabla. Consistencia final tipo masa de waffle con verdura. Sin termómetro: si un poco de mezcla sube a la mitad de altura y flota, el aceite está listo.",
+  "steps": [
+    {
+      "title": "Hervir la acelga",
+      "text": "Hervir las hojas de acelga, no más de lo necesario. Escurrir bien.",
+      "timer": 150
+    },
+    {
+      "title": "Picar a mano",
+      "text": "Pasar la acelga a una tabla grande y picarla a cuchillo. No usar procesadora: queda una pasta y el buñuelo pierde textura."
+    },
+    {
+      "title": "Batir la base líquida",
+      "text": "Mezclar la leche, los huevos, la sal, la pimienta, el ají molido y el ajo rallado."
+    },
+    {
+      "title": "Sumar acelga, avena y harina",
+      "text": "Incorporar la acelga picada y revolver antes de sumar la avena y luego la harina, para evitar grumos."
+    },
+    {
+      "title": "Ajustar la textura",
+      "text": "Ir agregando harina extra hasta lograr una consistencia tipo masa de waffle con verdura."
+    },
+    {
+      "title": "Freír",
+      "text": "Calentar abundante aceite a fuego fuerte en una olla. Freír de a cucharones."
+    },
+    {
+      "title": "Escurrir y servir",
+      "text": "Retirar cuando estén dorados y escurrir sobre papel absorbente antes de servir."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pizza-napoletana",
+    "icon": "pizza",
+    "title": "Pizza Napoletana",
+    "subtitle": "55% hidratación · 24h de frío · horno casero con piedra",
+    "servings": "6 panetti (~260 g)"
+  },
+  {
+    "id": "tortillas-rapiditas",
+    "icon": "tortilla",
+    "title": "Tortillas de Trigo Rapiditas",
+    "subtitle": "Receta de @LaGuerrillaFood · dos harinas · sin vinagre ni polvo de hornear",
+    "servings": "22 a 25 tortillas de 40 g"
+  },
+  {
+    "id": "ny-bagels",
+    "icon": "bagel",
+    "title": "NY Bagels",
+    "subtitle": "Esponja tipo poolish · escaldados en agua con bicarbonato y miel",
+    "servings": "12 bagels"
+  },
+  {
+    "id": "bunuelos-acelga-avena",
+    "icon": "bunuelo",
+    "title": "Buñuelos de Acelga y Avena",
+    "subtitle": "Versión liviana · avena en lugar de harina · fritos o al horno",
+    "servings": "4 porciones (~12 buñuelos)"
+  },
+  {
+    "id": "bunuelos-acelga-guerrilla",
+    "icon": "bunuelo2",
+    "title": "Buñuelos de Acelga",
+    "subtitle": "Receta de @LaGuerrillaFood · acelga hervida y picada a cuchillo · fritos",
+    "servings": "1 paquete de acelga (varias porciones)"
+  },
+  {
+    "id": "galletitas-perro",
+    "icon": "dog",
+    "title": "Galletitas Caseras para Perro",
+    "subtitle": "Calabaza y avena · crocantes · sin azúcar, sal agregada ni ingredientes tóxicos",
+    "servings": "~20 galletitas chicas"
+  }
+]

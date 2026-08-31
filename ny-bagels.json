@@ -1,0 +1,119 @@
+{
+  "id": "ny-bagels",
+  "icon": "bagel",
+  "title": "NY Bagels",
+  "subtitle": "Esponja tipo poolish · escaldados en agua con bicarbonato y miel",
+  "servings": "12 bagels",
+  "time": "Esponja ~2-2.5 h + reposo + 3 h de frío (o toda la noche)",
+  "oven": "220°C, 10 a 12 min",
+  "ingredients": [
+    {
+      "group": "Esponja"
+    },
+    {
+      "name": "Harina 000",
+      "amount": "567 g"
+    },
+    {
+      "name": "Agua",
+      "amount": "625 g"
+    },
+    {
+      "name": "Levadura seca",
+      "amount": "5 g"
+    },
+    {
+      "group": "Masa final"
+    },
+    {
+      "name": "Harina 000",
+      "amount": "510 g"
+    },
+    {
+      "name": "Levadura seca",
+      "amount": "2,25 g"
+    },
+    {
+      "name": "Azúcar rubia",
+      "amount": "10 g"
+    },
+    {
+      "name": "Sal",
+      "amount": "14 g"
+    },
+    {
+      "name": "Esponja",
+      "amount": "toda"
+    },
+    {
+      "group": "Escaldado y decorado"
+    },
+    {
+      "name": "Agua para hervir",
+      "amount": "c/n"
+    },
+    {
+      "name": "Miel (o syrup o azúcar rubia)",
+      "amount": "2 cdas"
+    },
+    {
+      "name": "Bicarbonato de sodio",
+      "amount": "1 cda"
+    },
+    {
+      "name": "Huevo batido, para pincelar",
+      "amount": "1 u."
+    },
+    {
+      "name": "Semillas a elección",
+      "amount": "c/n"
+    }
+  ],
+  "notes": "Harina total: 1077 g. Hidratación total ≈58%, sal ≈1,3%, levadura total ≈0,67%. El escaldado en agua con bicarbonato (no solo agua con miel) es lo que da la corteza brillante y masticable característica.",
+  "steps": [
+    {
+      "title": "Formar la esponja",
+      "text": "Mezclar la harina 000, el agua y la levadura seca hasta integrar. Tapar y dejar fermentar a temperatura ambiente hasta que esté burbujeante y haya crecido bien.",
+      "timer": 8100
+    },
+    {
+      "title": "Amasar",
+      "text": "Agregar a la esponja la harina 000, la levadura seca, el azúcar rubia y la sal. Amasar con gancho a velocidad lenta y terminar a mano, hasta que no se pegue a los dedos.",
+      "timer": 600
+    },
+    {
+      "title": "Bollado",
+      "text": "Formar 12 bollos y dejar descansar, tapados con plástico.",
+      "timer": 1200
+    },
+    {
+      "title": "Dar forma",
+      "text": "Agujerear cada bollo por el centro y darle forma de bagel. Dejar descansar un poco más.",
+      "timer": 1200
+    },
+    {
+      "title": "Frío",
+      "text": "Llevar los bagels a la heladera, tapados con plástico, durante 3 horas o toda la noche.",
+      "longStep": true
+    },
+    {
+      "title": "Atemperar",
+      "text": "Sacar los bagels de la heladera y dejar que tomen temperatura ambiente.",
+      "timer": 1200
+    },
+    {
+      "title": "Hervir",
+      "text": "Hervir agua con 2 cucharadas de miel (o syrup o azúcar rubia) y 1 cucharada de bicarbonato de sodio. Bajar el fuego para mantener un hervor suave."
+    },
+    {
+      "title": "Escaldar",
+      "text": "Pasar cada bagel por el agua hirviendo, un tiempo de cada lado.",
+      "timer": 60
+    },
+    {
+      "title": "Decorar y hornear",
+      "text": "Pincelar con huevo batido, decorar con semillas y hornear en horno precalentado a 220°C, hasta dorar.",
+      "timer": 660
+    }
+  ]
+}

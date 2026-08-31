@@ -360,8 +360,8 @@
   const CLOCK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`;
   const HOURGLASS_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#B8AFA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12M6 3c0 5 12 5 12 0M6 21c0-5 12-5 12 0"/></svg>`;
 
-  // ---------- SEED DATA (mantenido por Claude; se sincroniza a storage) ----------
-  const SEED_RECIPES = [
+  // ---------- SEED DATA (fallback si falla la carga dinámica) ----------
+  const SEED_RECIPES_FALLBACK = [
     {
       id: "pizza-napoletana",
       icon: "pizza",
@@ -541,16 +541,26 @@
   ];
 
   // ---------- STATE ----------
-  let recipes = [];
+  const RECIPES_BASE = 'recipes/'; // carpeta con index.json + un .json por receta
+  let recipes = [];               // metadata liviana (grilla): id, icon, title, subtitle, servings
+  let recipeCache = {};           // recetas completas ya descargadas, por id
   let currentRecipe = null;
   let cookStepIndex = 0;
   let timerInterval = null;
   let timerRemaining = 0;
   let timerRunning = false;
 
-  // ---------- CARGA DE RECETAS (fijas en el código, sin storage) ----------
+  // ---------- CARGA DE RECETAS (dinámica: recipes/index.json) ----------
   async function loadRecipes() {
-    recipes = SEED_RECIPES;
+    try {
+      const res = await fetch(RECIPES_BASE + 'index.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      recipes = await res.json();
+    } catch (e) {
+      console.warn('No se pudo cargar recipes/index.json, uso datos de reserva.', e);
+      recipes = SEED_RECIPES_FALLBACK.map(r => ({ id: r.id, icon: r.icon, title: r.title, subtitle: r.subtitle, servings: r.servings }));
+      SEED_RECIPES_FALLBACK.forEach(r => { recipeCache[r.id] = r; });
+    }
   }
 
   // ---------- RENDER: HOME ----------
@@ -575,9 +585,32 @@
   }
 
   // ---------- RENDER: DETAIL ----------
-  function openRecipe(id) {
-    currentRecipe = recipes.find(r => r.id === id);
-    if (!currentRecipe) return;
+  async function openRecipe(id) {
+    // Pantalla de detalle en estado "cargando" mientras se resuelve el JSON completo
+    showScreen('detail');
+    document.getElementById('detail-hero').innerHTML = ICONS[(recipes.find(r=>r.id===id)||{}).icon] || ICONS.tortilla;
+    document.getElementById('detail-title').textContent = (recipes.find(r=>r.id===id)||{}).title || 'Cargando…';
+    document.getElementById('detail-sub').textContent = '';
+    document.getElementById('detail-meta').innerHTML = '';
+    document.getElementById('detail-ingredients').innerHTML = '';
+    document.getElementById('detail-notes').textContent = '';
+
+    let full = recipeCache[id];
+    if (!full) {
+      try {
+        const res = await fetch(RECIPES_BASE + id + '.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        full = await res.json();
+        recipeCache[id] = full;
+      } catch (e) {
+        console.warn('No se pudo cargar la receta ' + id, e);
+        document.getElementById('detail-title').textContent = 'No se pudo cargar la receta';
+        document.getElementById('detail-notes').textContent = 'Revisá tu conexión e intentá de nuevo.';
+        return;
+      }
+    }
+
+    currentRecipe = full;
     document.getElementById('detail-hero').innerHTML = ICONS[currentRecipe.icon] || ICONS.tortilla;
     document.getElementById('detail-title').textContent = currentRecipe.title;
     document.getElementById('detail-sub').textContent = currentRecipe.subtitle || '';
@@ -592,7 +625,6 @@
         : `<li><span>${i.name}</span><span class="amt">${i.amount}</span></li>`
     ).join('');
     document.getElementById('detail-notes').textContent = currentRecipe.notes || '';
-    showScreen('detail');
   }
 
   function goHome() { showScreen('home'); }
