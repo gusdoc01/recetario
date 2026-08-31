@@ -9,36 +9,52 @@
   "ingredients": [
     {
       "name": "Harina tipo 00 (W260-300)",
-      "amount": "1000 g"
+      "amount": "1000 g",
+      "id": "harina"
     },
     {
       "name": "Agua fría (10-15°C)",
-      "amount": "550 g"
+      "amount": "550 g",
+      "id": "agua"
     },
     {
       "name": "Sal fina",
-      "amount": "24 g"
+      "amount": "24 g",
+      "id": "sal"
     },
     {
       "name": "Levadura fresca",
-      "amount": "3 g"
+      "amount": "3 g",
+      "id": "levadura"
     }
   ],
   "notes": "Precalentá la piedra 60 min mínimo. Calor estático, piedra media-baja. Si extendés a 48h de fermentación, bajá la levadura a 1.5 g.",
   "steps": [
     {
       "title": "Disolvé la levadura",
-      "text": "Disolvé la levadura fresca en aproximadamente el 10% del agua (fría). Reservá el resto del agua."
+      "text": "Disolvé la levadura fresca en aproximadamente el 10% del agua (fría). Reservá el resto del agua.",
+      "ingredientRefs": [
+        "levadura",
+        "agua"
+      ]
     },
     {
       "title": "Autolisis",
       "text": "Mezclá la harina con el 90% restante del agua hasta que no queden grumos secos. Dejá descansar.",
-      "timer": 1200
+      "timer": 1200,
+      "ingredientRefs": [
+        "harina",
+        "agua"
+      ]
     },
     {
       "title": "Incorporá levadura y sal, amasá",
       "text": "Agregá el agua con la levadura disuelta y amasá. Incorporá la sal de a poco, sin cortar el gluten, hasta lograr una masa lisa y elástica.",
-      "timer": 240
+      "timer": 240,
+      "ingredientRefs": [
+        "agua",
+        "sal"
+      ]
     },
     {
       "title": "Reposo corto",
