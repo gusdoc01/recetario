@@ -1,0 +1,102 @@
+{
+  "id": "bunuelos-acelga-avena",
+  "icon": "bunuelo",
+  "title": "Buñuelos de Acelga y Avena",
+  "subtitle": "Versión liviana · avena en lugar de harina · fritos o al horno",
+  "servings": "4 porciones (~12 buñuelos)",
+  "time": "Reposo 5 min + cocción 20-25 min",
+  "oven": "200°C, 20 a 25 min (o fritos)",
+  "ingredients": [
+    {
+      "name": "Acelga (solo hojas, sin pencas)",
+      "amount": "1 atado",
+      "id": "acelga"
+    },
+    {
+      "name": "Cebolla chica",
+      "amount": "1",
+      "id": "cebolla"
+    },
+    {
+      "name": "Diente de ajo",
+      "amount": "1",
+      "id": "ajo"
+    },
+    {
+      "name": "Huevos",
+      "amount": "2",
+      "id": "huevos"
+    },
+    {
+      "name": "Avena arrollada o instantánea",
+      "amount": "4 cdas",
+      "id": "avena"
+    },
+    {
+      "name": "Aceite de oliva",
+      "amount": "1 cda",
+      "id": "aceite-oliva"
+    },
+    {
+      "name": "Sal",
+      "amount": "1/2 cdita",
+      "id": "sal"
+    },
+    {
+      "name": "Pimienta",
+      "amount": "1/4 cdita",
+      "id": "pimienta"
+    },
+    {
+      "name": "Aceite para freír o spray",
+      "amount": "3 cdas",
+      "id": "aceite-freir"
+    }
+  ],
+  "notes": "Se le puede sumar queso rallado o nuez moscada, o reemplazar la acelga por espinaca. La versión al horno queda más liviana; la frita, más sabrosa.",
+  "steps": [
+    {
+      "title": "Preparar la acelga",
+      "text": "Lavar bien las hojas, picarlas finamente y rehogarlas en una sartén con unas gotas de aceite hasta que reduzcan y suelten el agua. Dejar entibiar.",
+      "ingredientRefs": [
+        "acelga"
+      ]
+    },
+    {
+      "title": "Rehogar cebolla y ajo",
+      "text": "Picar la cebolla y el ajo y rehogar en el aceite de oliva hasta que estén transparentes.",
+      "ingredientRefs": [
+        "cebolla",
+        "ajo",
+        "aceite-oliva"
+      ]
+    },
+    {
+      "title": "Mezclar la masa",
+      "text": "Combinar la acelga y el salteado con los huevos, la avena, la sal y la pimienta. Si queda muy líquida, agregar un poco más de avena.",
+      "ingredientRefs": [
+        "huevos",
+        "avena",
+        "sal",
+        "pimienta"
+      ]
+    },
+    {
+      "title": "Dejar reposar",
+      "text": "Dejar reposar la mezcla para que la avena absorba humedad y espese.",
+      "timer": 300
+    },
+    {
+      "title": "Cocinar",
+      "text": "Formar bollitos con dos cucharas y freír en aceite caliente hasta dorar de ambos lados, o hornear a 200°C dando vuelta a mitad de cocción.",
+      "timer": 1320,
+      "ingredientRefs": [
+        "aceite-freir"
+      ]
+    },
+    {
+      "title": "Servir",
+      "text": "Escurrir sobre papel absorbente si fueron fritos y servir calientes."
+    }
+  ]
+}

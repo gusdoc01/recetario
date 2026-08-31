@@ -1,0 +1,88 @@
+{
+  "id": "pizza-napoletana",
+  "icon": "pizza",
+  "title": "Pizza Napoletana",
+  "subtitle": "55% hidratación · 24h de frío · horno casero con piedra",
+  "servings": "6 panetti (~260 g)",
+  "time": "24 h + ~6 h de trabajo",
+  "oven": "Máx. 250°C, con piedra",
+  "ingredients": [
+    {
+      "name": "Harina tipo 00 (W260-300)",
+      "amount": "1000 g",
+      "id": "harina"
+    },
+    {
+      "name": "Agua fría (10-15°C)",
+      "amount": "550 g",
+      "id": "agua"
+    },
+    {
+      "name": "Sal fina",
+      "amount": "24 g",
+      "id": "sal"
+    },
+    {
+      "name": "Levadura fresca",
+      "amount": "3 g",
+      "id": "levadura"
+    }
+  ],
+  "notes": "Precalentá la piedra 60 min mínimo. Calor estático, piedra media-baja. Si extendés a 48h de fermentación, bajá la levadura a 1.5 g.",
+  "steps": [
+    {
+      "title": "Disolvé la levadura",
+      "text": "Disolvé la levadura fresca en aproximadamente el 10% del agua (fría). Reservá el resto del agua.",
+      "ingredientRefs": [
+        "levadura",
+        "agua"
+      ]
+    },
+    {
+      "title": "Autolisis",
+      "text": "Mezclá la harina con el 90% restante del agua hasta que no queden grumos secos. Dejá descansar.",
+      "timer": 1200,
+      "ingredientRefs": [
+        "harina",
+        "agua"
+      ]
+    },
+    {
+      "title": "Incorporá levadura y sal, amasá",
+      "text": "Agregá el agua con la levadura disuelta y amasá. Incorporá la sal de a poco, sin cortar el gluten, hasta lograr una masa lisa y elástica.",
+      "timer": 240,
+      "ingredientRefs": [
+        "agua",
+        "sal"
+      ]
+    },
+    {
+      "title": "Reposo corto",
+      "text": "Dejá reposar la masa tapada a temperatura ambiente antes de dividir.",
+      "timer": 1500
+    },
+    {
+      "title": "Bollado inmediato (staglio)",
+      "text": "Dividí la masa en 6 panetti de ~260 g. Formá bollos tensos con la técnica de pliegue bajo la palma, sellando bien la base."
+    },
+    {
+      "title": "Fermentación en frío",
+      "text": "Colocá los 6 panetti separados entre sí en un contenedor hermético, en la heladera, exactamente 24 horas.",
+      "longStep": true
+    },
+    {
+      "title": "Atemperado",
+      "text": "Sacá los panetti de la heladera y dejalos a temperatura ambiente ~5 horas antes de estirar, para que el gluten se relaje.",
+      "longStep": true
+    },
+    {
+      "title": "Estirado",
+      "text": "Estirá cada panetto a mano sobre semolín o harina, del centro hacia afuera, dejando el cornicione intacto sin desgasificar. Diámetro objetivo: 28-30 cm."
+    },
+    {
+      "title": "Cocción",
+      "text": "Cociná 6-8 minutos, rotando a mitad de cocción. Últimos 1-2 min con grill para dorar el cornicione, vigilando de cerca.",
+      "timer": 420
+    }
+  ]
+}

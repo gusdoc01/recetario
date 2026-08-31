@@ -198,6 +198,16 @@
   }
   .cook-step-text{ font-size: 18px; line-height:1.55; color: var(--cook-ink); margin:0; flex-shrink:0; }
 
+  .ingredient-chips{
+    display:flex; flex-wrap:wrap; gap: 8px; margin-top: 14px;
+  }
+  .ingredient-chip{
+    background: var(--cook-panel); border-radius: var(--radius-pill);
+    padding: 7px 13px; font-size: 13px; color: var(--cook-ink-soft);
+    display:flex; align-items:baseline; gap: 5px; white-space:nowrap;
+  }
+  .ingredient-chip .amt{ color: var(--amber); font-weight:700; margin-left: 5px; }
+
   .timer-box{
     margin-top: 26px; background: var(--cook-panel); border-radius: 20px;
     padding: 22px; display:flex; flex-direction:column; align-items:center; gap:14px;
@@ -681,6 +691,18 @@ muffin: `<svg viewBox="0 0 100 100"><g>
     document.getElementById('cook-step-count').textContent = `Paso ${cookStepIndex + 1} de ${steps.length}`;
     document.getElementById('progress-fill').style.width = `${((cookStepIndex) / steps.length) * 100}%`;
 
+    let chipsHtml = '';
+    if (step.ingredientRefs && step.ingredientRefs.length) {
+      const byId = {};
+      (currentRecipe.ingredients || []).forEach(i => { if (i.id) byId[i.id] = i; });
+      const chips = step.ingredientRefs
+        .map(id => byId[id])
+        .filter(Boolean)
+        .map(i => `<span class="ingredient-chip"><span>${i.name}</span><span class="amt">${i.amount}</span></span>`)
+        .join('');
+      if (chips) chipsHtml = `<div class="ingredient-chips">${chips}</div>`;
+    }
+
     let extra = '';
     if (step.timer) {
       extra = `
@@ -703,6 +725,7 @@ muffin: `<svg viewBox="0 0 100 100"><g>
     main.innerHTML = `
       <h2 class="cook-step-title">${step.title}</h2>
       <p class="cook-step-text">${step.text}</p>
+      ${chipsHtml}
       ${extra}
     `;
 
