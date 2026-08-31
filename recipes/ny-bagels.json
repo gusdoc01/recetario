@@ -12,61 +12,74 @@
     },
     {
       "name": "Harina 000",
-      "amount": "567 g"
+      "amount": "567 g",
+      "id": "harina-esponja"
     },
     {
       "name": "Agua",
-      "amount": "625 g"
+      "amount": "625 g",
+      "id": "agua-esponja"
     },
     {
       "name": "Levadura seca",
-      "amount": "5 g"
+      "amount": "5 g",
+      "id": "levadura-esponja"
     },
     {
       "group": "Masa final"
     },
     {
       "name": "Harina 000",
-      "amount": "510 g"
+      "amount": "510 g",
+      "id": "harina-masa"
     },
     {
       "name": "Levadura seca",
-      "amount": "2,25 g"
+      "amount": "2,25 g",
+      "id": "levadura-masa"
     },
     {
       "name": "Azúcar rubia",
-      "amount": "10 g"
+      "amount": "10 g",
+      "id": "azucar"
     },
     {
       "name": "Sal",
-      "amount": "14 g"
+      "amount": "14 g",
+      "id": "sal"
     },
     {
       "name": "Esponja",
-      "amount": "toda"
+      "amount": "toda",
+      "id": "esponja"
     },
     {
       "group": "Escaldado y decorado"
     },
     {
       "name": "Agua para hervir",
-      "amount": "c/n"
+      "amount": "c/n",
+      "id": "agua-hervir"
     },
     {
       "name": "Miel (o syrup o azúcar rubia)",
-      "amount": "2 cdas"
+      "amount": "2 cdas",
+      "id": "miel"
     },
     {
       "name": "Bicarbonato de sodio",
-      "amount": "1 cda"
+      "amount": "1 cda",
+      "id": "bicarbonato"
     },
     {
       "name": "Huevo batido, para pincelar",
-      "amount": "1 u."
+      "amount": "1 u.",
+      "id": "huevo"
     },
     {
       "name": "Semillas a elección",
-      "amount": "c/n"
+      "amount": "c/n",
+      "id": "semillas"
     }
   ],
   "notes": "Harina total: 1077 g. Hidratación total ≈58%, sal ≈1,3%, levadura total ≈0,67%. El escaldado en agua con bicarbonato (no solo agua con miel) es lo que da la corteza brillante y masticable característica.",
@@ -74,12 +87,24 @@
     {
       "title": "Formar la esponja",
       "text": "Mezclar la harina 000, el agua y la levadura seca hasta integrar. Tapar y dejar fermentar a temperatura ambiente hasta que esté burbujeante y haya crecido bien.",
-      "timer": 8100
+      "timer": 8100,
+      "ingredientRefs": [
+        "harina-esponja",
+        "agua-esponja",
+        "levadura-esponja"
+      ]
     },
     {
       "title": "Amasar",
       "text": "Agregar a la esponja la harina 000, la levadura seca, el azúcar rubia y la sal. Amasar con gancho a velocidad lenta y terminar a mano, hasta que no se pegue a los dedos.",
-      "timer": 600
+      "timer": 600,
+      "ingredientRefs": [
+        "esponja",
+        "harina-masa",
+        "levadura-masa",
+        "azucar",
+        "sal"
+      ]
     },
     {
       "title": "Bollado",
@@ -103,7 +128,12 @@
     },
     {
       "title": "Hervir",
-      "text": "Hervir agua con 2 cucharadas de miel (o syrup o azúcar rubia) y 1 cucharada de bicarbonato de sodio. Bajar el fuego para mantener un hervor suave."
+      "text": "Hervir agua con 2 cucharadas de miel (o syrup o azúcar rubia) y 1 cucharada de bicarbonato de sodio. Bajar el fuego para mantener un hervor suave.",
+      "ingredientRefs": [
+        "agua-hervir",
+        "miel",
+        "bicarbonato"
+      ]
     },
     {
       "title": "Escaldar",
@@ -113,7 +143,11 @@
     {
       "title": "Decorar y hornear",
       "text": "Pincelar con huevo batido, decorar con semillas y hornear en horno precalentado a 220°C, hasta dorar.",
-      "timer": 660
+      "timer": 660,
+      "ingredientRefs": [
+        "huevo",
+        "semillas"
+      ]
     }
   ]
 }
