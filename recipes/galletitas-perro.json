@@ -9,23 +9,28 @@
   "ingredients": [
     {
       "name": "Harina integral",
-      "amount": "2 tazas"
+      "amount": "2 tazas",
+      "id": "harina"
     },
     {
       "name": "Avena arrollada",
-      "amount": "1 taza"
+      "amount": "1 taza",
+      "id": "avena"
     },
     {
       "name": "Calabaza cocida, en puré (sin sal ni azúcar)",
-      "amount": "2 tazas"
+      "amount": "2 tazas",
+      "id": "calabaza"
     },
     {
       "name": "Manteca de maní natural, sin azúcar ni xilitol",
-      "amount": "2 cdas"
+      "amount": "2 cdas",
+      "id": "manteca-mani"
     },
     {
       "name": "Huevo grande",
-      "amount": "1 u."
+      "amount": "1 u.",
+      "id": "huevo"
     }
   ],
   "notes": "Se conservan hasta 1 semana en frasco hermético, o meses en el freezer. Evitar siempre: chocolate, uvas/pasas, cebolla, ajo, xilitol y sal en exceso. Ante alguna condición particular del perro, consultar con el veterinario.",
@@ -36,11 +41,20 @@
     },
     {
       "title": "Mezclar secos",
-      "text": "En un bowl grande mezclar la harina integral y la avena."
+      "text": "En un bowl grande mezclar la harina integral y la avena.",
+      "ingredientRefs": [
+        "harina",
+        "avena"
+      ]
     },
     {
       "title": "Agregar húmedos",
-      "text": "Sumar el puré de calabaza, la manteca de maní y el huevo, y mezclar hasta formar una masa uniforme. Ajustar con agua o harina si hace falta."
+      "text": "Sumar el puré de calabaza, la manteca de maní y el huevo, y mezclar hasta formar una masa uniforme. Ajustar con agua o harina si hace falta.",
+      "ingredientRefs": [
+        "calabaza",
+        "manteca-mani",
+        "huevo"
+      ]
     },
     {
       "title": "Estirar y cortar",
