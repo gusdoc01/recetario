@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recetario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #F6F4EF;
+    --paper-alt: #EDE9E0;
+    --ink: #26221D;
+    --ink-soft: #6F6A60;
+    --line: #DEDACE;
+    --sage: #4B7F52;
+    --sage-deep: #375D3C;
+    --sage-tint: #E4EEE3;
+    --amber: #D98E3F;
+    --amber-deep: #B06F27;
+    --amber-tint: #F7E9D4;
+    --cook-bg: #201C18;
+    --cook-panel: #2B2621;
+    --cook-ink: #F3EEE4;
+    --cook-ink-soft: #B8AFA1;
+    --radius-card: 20px;
+    --radius-pill: 999px;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html,body{ margin:0; padding:0; height:100%; }
+  body{
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    overscroll-behavior-y: contain;
+  }
+  #app{ max-width: 560px; margin: 0 auto; min-height: 100vh; position:relative; padding-bottom: 24px; }
+
+  button{ font-family: inherit; cursor:pointer; border:none; background:none; color:inherit; }
+  button:focus-visible, a:focus-visible{ outline: 2px solid var(--sage-deep); outline-offset: 2px; }
+
+  /* ---------- HOME ---------- */
+  .home-header{ padding: 28px 20px 10px; }
+  .home-header h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 32px;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .home-header p{
+    margin:0; color: var(--ink-soft); font-size: 15px;
+  }
+
+  .grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    padding: 16px 20px 12px;
+  }
+  .card{
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 0;
+    text-align:left;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition: transform .15s ease;
+  }
+  .card:active{ transform: scale(0.97); }
+  .card-icon{
+    aspect-ratio: 1 / 0.82;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--paper-alt);
+  }
+  .card-icon svg{ width: 62%; height: 62%; }
+  .card-body{ padding: 12px 14px 16px; }
+  .card-title{
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 17px; line-height:1.2; margin: 0 0 4px;
+  }
+  .card-meta{ font-size: 12.5px; color: var(--ink-soft); margin:0; }
+
+  .empty-state{
+    margin: 24px 20px; padding: 28px 20px;
+    border: 1px dashed var(--line); border-radius: var(--radius-card);
+    text-align:center; color: var(--ink-soft); font-size: 14px;
+  }
+
+  /* ---------- DETAIL ---------- */
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  .topbar{
+    display:flex; align-items:center; gap: 10px;
+    padding: 16px 16px 4px;
+  }
+  .back-btn{
+    width:38px; height:38px; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--paper-alt); flex-shrink:0;
+  }
+  .back-btn svg{ width:18px; height:18px; }
+
+  .detail-hero{
+    margin: 4px 20px 0; border-radius: var(--radius-card);
+    background: var(--paper-alt); display:flex; align-items:center; justify-content:center;
+    aspect-ratio: 16/9;
+  }
+  .detail-hero svg{ width: 40%; height: 40%; }
+
+  .detail-body{ padding: 18px 20px 140px; }
+  .detail-title{
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 27px; line-height:1.15; margin: 0 0 6px;
+  }
+  .detail-sub{ color: var(--ink-soft); font-size: 14.5px; margin: 0 0 18px; }
+
+  .meta-row{
+    display:flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px;
+  }
+  .meta-pill{
+    background: var(--sage-tint); color: var(--sage-deep);
+    border-radius: var(--radius-pill); padding: 7px 13px;
+    font-size: 12.5px; font-weight: 600; display:flex; align-items:center; gap:6px;
+  }
+
+  .section-label{
+    font-size: 13px; font-weight: 700; text-transform: none;
+    color: var(--ink); margin: 0 0 10px; letter-spacing: 0;
+  }
+
+  .ingredient-list{ list-style:none; margin:0 0 26px; padding:0; }
+  .ingredient-list li{
+    display:flex; justify-content: space-between; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .ingredient-list li:last-child{ border-bottom:none; }
+  .ingredient-list .amt{ color: var(--ink-soft); white-space:nowrap; }
+  .ingredient-list li.ing-group{
+    display:block; border-bottom:none; padding: 16px 0 6px;
+    font-size: 12.5px; font-weight: 700; color: var(--sage-deep);
+  }
+  .ingredient-list li.ing-group:first-child{ padding-top: 0; }
+
+  .notes-box{
+    background: var(--paper-alt); border-radius: 14px; padding: 14px 16px;
+    font-size: 13.8px; color: var(--ink-soft); line-height:1.5;
+  }
+
+  .cta-dock{
+    position: fixed; left:0; right:0; bottom:0;
+    max-width: 560px; margin: 0 auto;
+    padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--paper) 60%, transparent);
+  }
+  .cta-btn{
+    width:100%; background: var(--sage); color:#fff;
+    padding: 16px 20px; border-radius: var(--radius-pill);
+    font-size: 16px; font-weight: 700;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    box-shadow: 0 8px 20px rgba(75,127,82,0.35);
+  }
+  .cta-btn:active{ transform: scale(0.98); }
+  .cta-btn svg{ width:18px; height:18px; }
+
+  /* ---------- COOK MODE ---------- */
+  #screen-cook{
+    position: fixed; inset:0; background: var(--cook-bg); color: var(--cook-ink);
+    display:none; flex-direction:column; z-index: 50;
+    max-width: 560px; margin: 0 auto;
+  }
+  #screen-cook.active{ display:flex; }
+
+  .cook-top{ padding: calc(14px + env(safe-area-inset-top)) 20px 12px; }
+  .cook-top-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .cook-exit{
+    width:36px; height:36px; border-radius:50%; background: rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cook-exit svg{ width:16px; height:16px; stroke: var(--cook-ink); }
+  .cook-step-count{ font-size: 13px; color: var(--cook-ink-soft); font-weight:600; }
+
+  .progress-track{
+    height:4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow:hidden;
+  }
+  .progress-fill{ height:100%; background: var(--amber); border-radius:4px; transition: width .25s ease; }
+
+  .cook-main{ flex:1; overflow-y:auto; padding: 8px 24px 20px; display:flex; flex-direction:column; }
+  .cook-step-title{
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 26px; line-height:1.2; margin: 18px 0 14px;
+  }
+  .cook-step-text{ font-size: 18px; line-height:1.55; color: var(--cook-ink); margin:0; flex-shrink:0; }
+
+  .ingredient-chips{
+    display:flex; flex-wrap:wrap; gap: 8px; margin-top: 14px;
+  }
+  .ingredient-chip{
+    background: var(--cook-panel); border-radius: var(--radius-pill);
+    padding: 7px 13px; font-size: 13px; color: var(--cook-ink-soft);
+    display:flex; align-items:baseline; gap: 5px; white-space:nowrap;
+  }
+  .ingredient-chip .amt{ color: var(--amber); font-weight:700; margin-left: 5px; }
+
+  .timer-box{
+    margin-top: 26px; background: var(--cook-panel); border-radius: 20px;
+    padding: 22px; display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  .timer-display{
+    font-family: var(--font-display); font-size: 44px; font-weight: 600;
+    font-variant-numeric: tabular-nums; letter-spacing: 0.01em;
+  }
+  .timer-display.running{ color: var(--amber); }
+  .timer-display.done{ color: var(--sage); }
+  .timer-label{ font-size: 12.5px; color: var(--cook-ink-soft); margin-top:-8px; }
+  .timer-controls{ display:flex; gap: 10px; }
+  .timer-btn{
+    padding: 10px 18px; border-radius: var(--radius-pill);
+    background: rgba(255,255,255,0.08); color: var(--cook-ink);
+    font-size: 14px; font-weight:700;
+  }
+  .timer-btn.primary{ background: var(--amber); color: #201C18; }
+
+  .long-step-note{
+    margin-top:22px; display:flex; align-items:center; gap:10px;
+    background: var(--cook-panel); border-radius:14px; padding:12px 16px;
+    font-size: 13.5px; color: var(--cook-ink-soft);
+  }
+  .long-step-note svg{ width:18px; height:18px; flex-shrink:0; }
+
+  .cook-nav{
+    display:flex; gap: 10px; padding: 14px 20px calc(16px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-btn{
+    flex:1; padding: 15px; border-radius: var(--radius-pill); font-size:15px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .nav-btn.prev{ background: rgba(255,255,255,0.08); color: var(--cook-ink); }
+  .nav-btn.next{ background: var(--sage); color:#fff; }
+  .nav-btn.finish{ background: var(--amber); color:#201C18; }
+  .nav-btn[disabled]{ opacity: 0.35; pointer-events:none; }
+
+  .done-screen{ text-align:center; padding: 60px 30px; }
+  .done-screen svg{ width:56px; height:56px; margin-bottom:18px; }
+  .done-screen h2{ font-family: var(--font-display); font-size:26px; margin:0 0 8px; }
+  .done-screen p{ color: var(--cook-ink-soft); font-size:14.5px; margin:0 0 26px; }
+</style>
+
+</head>
+<body>
+<div id="app">
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <div class="home-header">
+      <h1>Recetario</h1>
+      <p id="home-sub">Elegí una receta para empezar.</p>
+    </div>
+    <div id="grid" class="grid"></div>
+  </div>
+
+  <!-- DETAIL -->
+  <div id="screen-detail" class="screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="goHome()" aria-label="Volver">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#26221D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+    </div>
+    <div id="detail-hero" class="detail-hero"></div>
+    <div class="detail-body">
+      <h2 id="detail-title" class="detail-title"></h2>
+      <p id="detail-sub" class="detail-sub"></p>
+      <div id="detail-meta" class="meta-row"></div>
+
+      <p class="section-label">Ingredientes</p>
+      <ul id="detail-ingredients" class="ingredient-list"></ul>
+
+      <p class="section-label">Notas</p>
+      <div id="detail-notes" class="notes-box"></div>
+    </div>
+    <div class="cta-dock">
+      <button class="cta-btn" onclick="startCooking()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        EMPEZAR A COCINAR
+      </button>
+    </div>
+  </div>
+
+  <!-- COOK MODE -->
+  <div id="screen-cook">
+    <div class="cook-top">
+      <div class="cook-top-row">
+        <button class="cook-exit" onclick="exitCooking()" aria-label="Salir">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <span id="cook-step-count" class="cook-step-count"></span>
+      </div>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+    <div id="cook-main" class="cook-main"></div>
+    <div id="cook-nav" class="cook-nav"></div>
+  </div>
+
+</div>
+
+<script>
+  // ---------- ICONS (custom flat illustrations, no photos) ----------
+  const ICONS = {
+    pizza: `<svg viewBox="0 0 100 100"><g>
+      <path d="M50 8 L92 82 A48 48 0 0 1 8 82 Z" fill="#D98E3F"/>
+      <path d="M50 8 L92 82 A48 48 0 0 1 8 82 Z" fill="none" stroke="#B06F27" stroke-width="2.5"/>
+      <path d="M14 74 A44 44 0 0 1 86 74" fill="none" stroke="#B06F27" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="46" cy="44" r="6" fill="#8E2E1F"/>
+      <circle cx="62" cy="58" r="6" fill="#8E2E1F"/>
+      <circle cx="38" cy="64" r="5" fill="#8E2E1F"/>
+      <circle cx="58" cy="36" r="5" fill="#4B7F52"/>
+      <circle cx="70" cy="48" r="4" fill="#4B7F52"/>
+    </g></svg>`,
+    tortilla: `<svg viewBox="0 0 100 100"><g>
+      <ellipse cx="50" cy="56" rx="40" ry="30" fill="#F0DBAE"/>
+      <ellipse cx="50" cy="56" rx="40" ry="30" fill="none" stroke="#C9A968" stroke-width="2.5"/>
+      <path d="M14 50 Q50 66 86 50" fill="none" stroke="#C9A968" stroke-width="2"/>
+      <path d="M20 40 Q50 54 80 40" fill="none" stroke="#C9A968" stroke-width="1.5" opacity="0.6"/>
+      <ellipse cx="50" cy="52" rx="9" ry="6" fill="#B7562F" opacity="0.85"/>
+      <ellipse cx="38" cy="58" rx="6" ry="4" fill="#4B7F52" opacity="0.8"/>
+      <ellipse cx="62" cy="58" rx="6" ry="4" fill="#4B7F52" opacity="0.8"/>
+    </g></svg>`,
+    bagel: `<svg viewBox="0 0 100 100"><g>
+      <circle cx="50" cy="54" r="30" fill="none" stroke="#D9A75C" stroke-width="19"/>
+      <circle cx="50" cy="54" r="30" fill="none" stroke="#A9793A" stroke-width="1.5" opacity="0.55"/>
+      <circle cx="50" cy="54" r="39.5" fill="none" stroke="#A9793A" stroke-width="1.5" opacity="0.35"/>
+      <ellipse cx="36" cy="30" rx="2.4" ry="1.6" fill="#6B4A24" transform="rotate(-10 36 30)"/>
+      <ellipse cx="46" cy="25" rx="2.4" ry="1.6" fill="#6B4A24" transform="rotate(5 46 25)"/>
+      <ellipse cx="57" cy="26" rx="2.4" ry="1.6" fill="#6B4A24" transform="rotate(-8 57 26)"/>
+      <ellipse cx="66" cy="32" rx="2.4" ry="1.6" fill="#6B4A24" transform="rotate(15 66 32)"/>
+    </g></svg>`,
+    bunuelo: `<svg viewBox="0 0 100 100"><g>
+      <ellipse cx="50" cy="56" rx="37" ry="27" fill="#E3A75A"/>
+      <ellipse cx="50" cy="56" rx="37" ry="27" fill="none" stroke="#B07C34" stroke-width="2.5"/>
+      <ellipse cx="40" cy="47" rx="4.5" ry="2.4" fill="#4B7F52" transform="rotate(25 40 47)"/>
+      <ellipse cx="58" cy="42" rx="4" ry="2.2" fill="#4B7F52" transform="rotate(-15 58 42)"/>
+      <ellipse cx="62" cy="62" rx="4.5" ry="2.4" fill="#4B7F52" transform="rotate(10 62 62)"/>
+      <ellipse cx="42" cy="66" rx="4" ry="2.2" fill="#4B7F52" transform="rotate(-20 42 66)"/>
+    </g></svg>`,
+    bunuelo2: `<svg viewBox="0 0 100 100"><g>
+      <circle cx="50" cy="56" r="31" fill="#C97B2E"/>
+      <circle cx="50" cy="56" r="31" fill="none" stroke="#8E5720" stroke-width="2.5"/>
+      <ellipse cx="39" cy="46" rx="4.2" ry="2.3" fill="#4B7F52" transform="rotate(30 39 46)"/>
+      <ellipse cx="60" cy="48" rx="4" ry="2.2" fill="#4B7F52" transform="rotate(-20 60 48)"/>
+      <ellipse cx="58" cy="66" rx="4.2" ry="2.3" fill="#4B7F52" transform="rotate(12 58 66)"/>
+      <ellipse cx="40" cy="65" rx="3.8" ry="2.1" fill="#4B7F52" transform="rotate(-10 40 65)"/>
+    </g></svg>`,
+muffin: `<svg viewBox="0 0 100 100"><g>
+  <path d="M22 52 L30 88 A2 2 0 0 0 32 90 H68 A2 2 0 0 0 70 88 L78 52 Z" fill="#E3C27A" stroke="#B8934A" stroke-width="2.5"/>
+  <path d="M25 60 L75 60" stroke="#B8934A" stroke-width="1.3" opacity="0.55"/>
+  <path d="M27 70 L73 70" stroke="#B8934A" stroke-width="1.3" opacity="0.45"/>
+  <path d="M29 80 L71 80" stroke="#B8934A" stroke-width="1.3" opacity="0.35"/>
+  <path d="M20 52 Q50 26 80 52 Q66 40 50 40 Q34 40 20 52 Z" fill="#D9A94B" stroke="#B07C2E" stroke-width="2.5"/>
+  <ellipse cx="40" cy="38" rx="3.6" ry="2" fill="#8E2E1F" transform="rotate(15 40 38)"/>
+  <ellipse cx="58" cy="34" rx="3.6" ry="2" fill="#8E2E1F" transform="rotate(-10 58 34)"/>
+  <ellipse cx="50" cy="46" rx="3.2" ry="1.8" fill="#F2E2A8" transform="rotate(5 50 46)"/>
+</g></svg>`,
+    dog: `<svg viewBox="0 0 100 100"><g fill="#D6B989" stroke="#A98A54" stroke-width="2.5">
+      <rect x="28" y="45" width="44" height="10" rx="5"/>
+      <circle cx="24" cy="39" r="10.5"/>
+      <circle cx="24" cy="59" r="10.5"/>
+      <circle cx="76" cy="39" r="10.5"/>
+      <circle cx="76" cy="59" r="10.5"/>
+    </g></svg>`
+  };
+
+  const CHECK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#4B7F52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+  const CLOCK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`;
+  const HOURGLASS_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#B8AFA1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12M6 3c0 5 12 5 12 0M6 21c0-5 12-5 12 0"/></svg>`;
+
+  // ---------- SEED DATA (fallback si falla la carga dinámica) ----------
+  const SEED_RECIPES_FALLBACK = [
+    {
+      id: "pizza-napoletana",
+      icon: "pizza",
+      title: "Pizza Napoletana",
+      subtitle: "55% hidratación · 24h de frío · horno casero con piedra",
+      servings: "6 panetti (~260 g)",
+      time: "24 h + ~6 h de trabajo",
+      oven: "Máx. 250°C, con piedra",
+      ingredients: [
+        { name: "Harina tipo 00 (W260-300)", amount: "1000 g" },
+        { name: "Agua fría (10-15°C)", amount: "550 g" },
+        { name: "Sal fina", amount: "24 g" },
+        { name: "Levadura fresca", amount: "3 g" }
+      ],
+      notes: "Precalentá la piedra 60 min mínimo. Calor estático, piedra media-baja. Si extendés a 48h de fermentación, bajá la levadura a 1.5 g.",
+      steps: [
+        { title: "Disolvé la levadura", text: "Disolvé la levadura fresca en aproximadamente el 10% del agua (fría). Reservá el resto del agua." },
+        { title: "Autolisis", text: "Mezclá la harina con el 90% restante del agua hasta que no queden grumos secos. Dejá descansar.", timer: 1200 },
+        { title: "Incorporá levadura y sal, amasá", text: "Agregá el agua con la levadura disuelta y amasá. Incorporá la sal de a poco, sin cortar el gluten, hasta lograr una masa lisa y elástica.", timer: 240 },
+        { title: "Reposo corto", text: "Dejá reposar la masa tapada a temperatura ambiente antes de dividir.", timer: 1500 },
+        { title: "Bollado inmediato (staglio)", text: "Dividí la masa en 6 panetti de ~260 g. Formá bollos tensos con la técnica de pliegue bajo la palma, sellando bien la base." },
+        { title: "Fermentación en frío", text: "Colocá los 6 panetti separados entre sí en un contenedor hermético, en la heladera, exactamente 24 horas.", longStep: true },
+        { title: "Atemperado", text: "Sacá los panetti de la heladera y dejalos a temperatura ambiente ~5 horas antes de estirar, para que el gluten se relaje.", longStep: true },
+        { title: "Estirado", text: "Estirá cada panetto a mano sobre semolín o harina, del centro hacia afuera, dejando el cornicione intacto sin desgasificar. Diámetro objetivo: 28-30 cm." },
+        { title: "Cocción", text: "Cociná 6-8 minutos, rotando a mitad de cocción. Últimos 1-2 min con grill para dorar el cornicione, vigilando de cerca.", timer: 420 }
+      ]
+    },
+    {
+      id: "tortillas-rapiditas",
+      icon: "tortilla",
+      title: "Tortillas de Trigo Rapiditas",
+      subtitle: "Receta de @LaGuerrillaFood · dos harinas · sin vinagre ni polvo de hornear",
+      servings: "22 a 25 tortillas de 40 g",
+      time: "1 h de reposo + cocción",
+      oven: "Sartén, plancha o parrilla",
+      ingredients: [
+        { name: "Harina 000", amount: "250 g" },
+        { name: "Harina 0000", amount: "250 g" },
+        { name: "Agua", amount: "265 cc" },
+        { name: "Aceite (o grasa)", amount: "100 cc" },
+        { name: "Sal", amount: "10 g" }
+      ],
+      notes: "La 000 aporta fuerza y la 0000 elasticidad. No lleva vinagre ni polvo de hornear. Es ideal trabajar de a dos: uno estira y el otro cocina.",
+      steps: [
+        { title: "Mezclá harinas y agua", text: "En un bol poner el agua, la sal y las dos harinas (000 y 0000). Revolver hasta que la masa se despegue del bol." },
+        { title: "Amasá", text: "Pasar la masa a la mesada, agregar el aceite por encima y amasar con ganas. Tener harina adicional a mano por si hace falta ajustar el punto." },
+        { title: "Reposo", text: "Formar un bollo y dejar descansar tapado, a temperatura ambiente, durante al menos 1 hora.", timer: 3600 },
+        { title: "Bollado", text: "Cortar bollitos de 40 g cada uno (usar balanza si se puede). Salen entre 22 y 25 tortillas." },
+        { title: "Estirado", text: "Sobre la mesada con abundante harina, estirar cada bollito con palote hasta que quede bien fina." },
+        { title: "Cocción", text: "Cocinar en sartén caliente, plancha de hierro o parrilla. Dar vuelta cuando empiecen a dorar y retirar antes de que se cocinen de más." }
+      ]
+    },
+    {
+      id: "ny-bagels",
+      icon: "bagel",
+      title: "NY Bagels",
+      subtitle: "Esponja tipo poolish · escaldados en agua con bicarbonato y miel",
+      servings: "12 bagels",
+      time: "Esponja ~2-2.5 h + reposo + 3 h de frío (o toda la noche)",
+      oven: "220°C, 10 a 12 min",
+      ingredients: [
+        { group: "Esponja" },
+        { name: "Harina 000", amount: "567 g" },
+        { name: "Agua", amount: "625 g" },
+        { name: "Levadura seca", amount: "5 g" },
+        { group: "Masa final" },
+        { name: "Harina 000", amount: "510 g" },
+        { name: "Levadura seca", amount: "2,25 g" },
+        { name: "Azúcar rubia", amount: "10 g" },
+        { name: "Sal", amount: "14 g" },
+        { name: "Esponja", amount: "toda" },
+        { group: "Escaldado y decorado" },
+        { name: "Agua para hervir", amount: "c/n" },
+        { name: "Miel (o syrup o azúcar rubia)", amount: "2 cdas" },
+        { name: "Bicarbonato de sodio", amount: "1 cda" },
+        { name: "Huevo batido, para pincelar", amount: "1 u." },
+        { name: "Semillas a elección", amount: "c/n" }
+      ],
+      notes: "Harina total: 1077 g. Hidratación total ≈58%, sal ≈1,3%, levadura total ≈0,67%. El escaldado en agua con bicarbonato (no solo agua con miel) es lo que da la corteza brillante y masticable característica.",
+      steps: [
+        { title: "Formar la esponja", text: "Mezclar la harina 000, el agua y la levadura seca hasta integrar. Tapar y dejar fermentar a temperatura ambiente hasta que esté burbujeante y haya crecido bien.", timer: 8100 },
+        { title: "Amasar", text: "Agregar a la esponja la harina 000, la levadura seca, el azúcar rubia y la sal. Amasar con gancho a velocidad lenta y terminar a mano, hasta que no se pegue a los dedos.", timer: 600 },
+        { title: "Bollado", text: "Formar 12 bollos y dejar descansar, tapados con plástico.", timer: 1200 },
+        { title: "Dar forma", text: "Agujerear cada bollo por el centro y darle forma de bagel. Dejar descansar un poco más.", timer: 1200 },
+        { title: "Frío", text: "Llevar los bagels a la heladera, tapados con plástico, durante 3 horas o toda la noche.", longStep: true },
+        { title: "Atemperar", text: "Sacar los bagels de la heladera y dejar que tomen temperatura ambiente.", timer: 1200 },
+        { title: "Hervir", text: "Hervir agua con 2 cucharadas de miel (o syrup o azúcar rubia) y 1 cucharada de bicarbonato de sodio. Bajar el fuego para mantener un hervor suave." },
+        { title: "Escaldar", text: "Pasar cada bagel por el agua hirviendo, un tiempo de cada lado.", timer: 60 },
+        { title: "Decorar y hornear", text: "Pincelar con huevo batido, decorar con semillas y hornear en horno precalentado a 220°C, hasta dorar.", timer: 660 }
+      ]
+    },
+    {
+      id: "bunuelos-acelga-avena",
+      icon: "bunuelo",
+      title: "Buñuelos de Acelga y Avena",
+      subtitle: "Versión liviana · avena en lugar de harina · fritos o al horno",
+      servings: "4 porciones (~12 buñuelos)",
+      time: "Reposo 5 min + cocción 20-25 min",
+      oven: "200°C, 20 a 25 min (o fritos)",
+      ingredients: [
+        { name: "Acelga (solo hojas, sin pencas)", amount: "1 atado" },
+        { name: "Cebolla chica", amount: "1" },
+        { name: "Diente de ajo", amount: "1" },
+        { name: "Huevos", amount: "2" },
+        { name: "Avena arrollada o instantánea", amount: "4 cdas" },
+        { name: "Aceite de oliva", amount: "1 cda" },
+        { name: "Sal", amount: "1/2 cdita" },
+        { name: "Pimienta", amount: "1/4 cdita" },
+        { name: "Aceite para freír o spray", amount: "3 cdas" }
+      ],
+      notes: "Se le puede sumar queso rallado o nuez moscada, o reemplazar la acelga por espinaca. La versión al horno queda más liviana; la frita, más sabrosa.",
+      steps: [
+        { title: "Preparar la acelga", text: "Lavar bien las hojas, picarlas finamente y rehogarlas en una sartén con unas gotas de aceite hasta que reduzcan y suelten el agua. Dejar entibiar." },
+        { title: "Rehogar cebolla y ajo", text: "Picar la cebolla y el ajo y rehogar en el aceite de oliva hasta que estén transparentes." },
+        { title: "Mezclar la masa", text: "Combinar la acelga y el salteado con los huevos, la avena, la sal y la pimienta. Si queda muy líquida, agregar un poco más de avena." },
+        { title: "Dejar reposar", text: "Dejar reposar la mezcla para que la avena absorba humedad y espese.", timer: 300 },
+        { title: "Cocinar", text: "Formar bollitos con dos cucharas y freír en aceite caliente hasta dorar de ambos lados, o hornear a 200°C dando vuelta a mitad de cocción.", timer: 1320 },
+        { title: "Servir", text: "Escurrir sobre papel absorbente si fueron fritos y servir calientes." }
+      ]
+    },
+    {
+      id: "bunuelos-acelga-guerrilla",
+      icon: "bunuelo2",
+      title: "Buñuelos de Acelga",
+      subtitle: "Receta de @LaGuerrillaFood · acelga hervida y picada a cuchillo · fritos",
+      servings: "1 paquete de acelga (varias porciones)",
+      time: "Hervor 2-3 min + fritura",
+      oven: "Frito en abundante aceite caliente",
+      ingredients: [
+        { name: "Acelga", amount: "1 paquete" },
+        { name: "Huevos", amount: "6" },
+        { name: "Avena instantánea", amount: "100 g" },
+        { name: "Leche", amount: "100 cc" },
+        { name: "Harina 0000 (+ extra para ajustar)", amount: "200 g" },
+        { name: "Ajo rallado", amount: "c/n" },
+        { name: "Pimienta molida", amount: "c/n" },
+        { name: "Ají molido", amount: "c/n" },
+        { name: "Sal", amount: "c/n" },
+        { name: "Aceite para freír", amount: "abundante" }
+      ],
+      notes: "Punto clave: no procesar la acelga, se pica a cuchillo en tabla. Consistencia final tipo masa de waffle con verdura. Sin termómetro: si un poco de mezcla sube a la mitad de altura y flota, el aceite está listo.",
+      steps: [
+        { title: "Hervir la acelga", text: "Hervir las hojas de acelga, no más de lo necesario. Escurrir bien.", timer: 150 },
+        { title: "Picar a mano", text: "Pasar la acelga a una tabla grande y picarla a cuchillo. No usar procesadora: queda una pasta y el buñuelo pierde textura." },
+        { title: "Batir la base líquida", text: "Mezclar la leche, los huevos, la sal, la pimienta, el ají molido y el ajo rallado." },
+        { title: "Sumar acelga, avena y harina", text: "Incorporar la acelga picada y revolver antes de sumar la avena y luego la harina, para evitar grumos." },
+        { title: "Ajustar la textura", text: "Ir agregando harina extra hasta lograr una consistencia tipo masa de waffle con verdura." },
+        { title: "Freír", text: "Calentar abundante aceite a fuego fuerte en una olla. Freír de a cucharones." },
+        { title: "Escurrir y servir", text: "Retirar cuando estén dorados y escurrir sobre papel absorbente antes de servir." }
+      ]
+    },
+    {
+      id: "galletitas-perro",
+      icon: "dog",
+      title: "Galletitas Caseras para Perro",
+      subtitle: "Calabaza y avena · crocantes · sin azúcar, sal agregada ni ingredientes tóxicos",
+      servings: "~20 galletitas chicas",
+      time: "20 a 25 min de horno",
+      oven: "180°C, calor estático",
+      ingredients: [
+        { name: "Harina integral", amount: "2 tazas" },
+        { name: "Avena arrollada", amount: "1 taza" },
+        { name: "Calabaza cocida, en puré (sin sal ni azúcar)", amount: "2 tazas" },
+        { name: "Manteca de maní natural, sin azúcar ni xilitol", amount: "2 cdas" },
+        { name: "Huevo grande", amount: "1 u." }
+      ],
+      notes: "Se conservan hasta 1 semana en frasco hermético, o meses en el freezer. Evitar siempre: chocolate, uvas/pasas, cebolla, ajo, xilitol y sal en exceso. Ante alguna condición particular del perro, consultar con el veterinario.",
+      steps: [
+        { title: "Precalentar el horno", text: "Precalentar el horno a 180°C y forrar una placa con papel manteca." },
+        { title: "Mezclar secos", text: "En un bowl grande mezclar la harina integral y la avena." },
+        { title: "Agregar húmedos", text: "Sumar el puré de calabaza, la manteca de maní y el huevo, y mezclar hasta formar una masa uniforme. Ajustar con agua o harina si hace falta." },
+        { title: "Estirar y cortar", text: "Estirar la masa hasta 1 cm de espesor y cortar con moldes o en cuadraditos o bastones." },
+        { title: "Hornear", text: "Colocar en la placa y hornear hasta que estén doradas y firmes al tacto.", timer: 1320 },
+        { title: "Enfriar", text: "Dejar enfriar completamente sobre una rejilla antes de dárselas al perro; se ponen más crocantes al enfriarse." }
+      ]
+    }
+  ];
+
+  // ---------- STATE ----------
+  const RECIPES_BASE = 'recipes/'; // carpeta con index.json + un .json por receta
+  let recipes = [];               // metadata liviana (grilla): id, icon, title, subtitle, servings
+  let recipeCache = {};           // recetas completas ya descargadas, por id
+  let currentRecipe = null;
+  let cookStepIndex = 0;
+  let timerInterval = null;
+  let timerRemaining = 0;
+  let timerRunning = false;
+
+  // ---------- CARGA DE RECETAS (dinámica: recipes/index.json) ----------
+  async function loadRecipes() {
+    try {
+      const res = await fetch(RECIPES_BASE + 'index.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      recipes = await res.json();
+    } catch (e) {
+      console.warn('No se pudo cargar recipes/index.json, uso datos de reserva.', e);
+      recipes = SEED_RECIPES_FALLBACK.map(r => ({ id: r.id, icon: r.icon, title: r.title, subtitle: r.subtitle, servings: r.servings }));
+      SEED_RECIPES_FALLBACK.forEach(r => { recipeCache[r.id] = r; });
+    }
+  }
+
+  // ---------- RENDER: HOME ----------
+  function renderHome() {
+    const grid = document.getElementById('grid');
+    document.getElementById('home-sub').textContent =
+      recipes.length ? 'Elegí una receta para empezar.' : 'Todavía no hay recetas cargadas.';
+    if (!recipes.length) {
+      grid.innerHTML = '';
+      grid.insertAdjacentHTML('afterend', `<div class="empty-state">Pedime en el chat que sume una receta y va a aparecer acá.</div>`);
+      return;
+    }
+    grid.innerHTML = recipes.map(r => `
+      <button class="card" onclick="openRecipe('${r.id}')">
+        <div class="card-icon">${ICONS[r.icon] || ICONS.tortilla}</div>
+        <div class="card-body">
+          <p class="card-title">${r.title}</p>
+          <p class="card-meta">${r.servings}</p>
+        </div>
+      </button>
+    `).join('');
+  }
+
+  // ---------- RENDER: DETAIL ----------
+  async function openRecipe(id) {
+    // Pantalla de detalle en estado "cargando" mientras se resuelve el JSON completo
+    showScreen('detail');
+    document.getElementById('detail-hero').innerHTML = ICONS[(recipes.find(r=>r.id===id)||{}).icon] || ICONS.tortilla;
+    document.getElementById('detail-title').textContent = (recipes.find(r=>r.id===id)||{}).title || 'Cargando…';
+    document.getElementById('detail-sub').textContent = '';
+    document.getElementById('detail-meta').innerHTML = '';
+    document.getElementById('detail-ingredients').innerHTML = '';
+    document.getElementById('detail-notes').textContent = '';
+
+    let full = recipeCache[id];
+    if (!full) {
+      try {
+        const res = await fetch(RECIPES_BASE + id + '.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        full = await res.json();
+        recipeCache[id] = full;
+      } catch (e) {
+        console.warn('No se pudo cargar la receta ' + id, e);
+        document.getElementById('detail-title').textContent = 'No se pudo cargar la receta';
+        document.getElementById('detail-notes').textContent = 'Revisá tu conexión e intentá de nuevo.';
+        return;
+      }
+    }
+
+    currentRecipe = full;
+    document.getElementById('detail-hero').innerHTML = ICONS[currentRecipe.icon] || ICONS.tortilla;
+    document.getElementById('detail-title').textContent = currentRecipe.title;
+    document.getElementById('detail-sub').textContent = currentRecipe.subtitle || '';
+    document.getElementById('detail-meta').innerHTML = `
+      <span class="meta-pill">${currentRecipe.servings}</span>
+      <span class="meta-pill">${currentRecipe.time}</span>
+      <span class="meta-pill">${currentRecipe.oven}</span>
+    `;
+    document.getElementById('detail-ingredients').innerHTML = currentRecipe.ingredients.map(i =>
+      i.group
+        ? `<li class="ing-group">${i.group}</li>`
+        : `<li><span>${i.name}</span><span class="amt">${i.amount}</span></li>`
+    ).join('');
+    document.getElementById('detail-notes').textContent = currentRecipe.notes || '';
+  }
+
+  function goHome() { showScreen('home'); }
+
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- COOK MODE ----------
+  function startCooking() {
+    if (!currentRecipe) return;
+    cookStepIndex = 0;
+    document.getElementById('screen-cook').classList.add('active');
+    renderCookStep();
+  }
+
+  function exitCooking() {
+    clearTimerInterval();
+    document.getElementById('screen-cook').classList.remove('active');
+  }
+
+  function renderCookStep() {
+    clearTimerInterval();
+    const steps = currentRecipe.steps;
+    const main = document.getElementById('cook-main');
+    const nav = document.getElementById('cook-nav');
+
+    if (cookStepIndex >= steps.length) {
+      main.innerHTML = `
+        <div class="done-screen">
+          ${CHECK_ICON}
+          <h2>¡Listo!</h2>
+          <p>Terminaste todos los pasos de ${currentRecipe.title}.</p>
+        </div>`;
+      nav.innerHTML = `<button class="nav-btn finish" onclick="exitCooking()">Volver al recetario</button>`;
+      document.getElementById('cook-step-count').textContent = '';
+      document.getElementById('progress-fill').style.width = '100%';
+      return;
+    }
+
+    const step = steps[cookStepIndex];
+    document.getElementById('cook-step-count').textContent = `Paso ${cookStepIndex + 1} de ${steps.length}`;
+    document.getElementById('progress-fill').style.width = `${((cookStepIndex) / steps.length) * 100}%`;
+
+    let chipsHtml = '';
+    if (step.ingredientRefs && step.ingredientRefs.length) {
+      const byId = {};
+      (currentRecipe.ingredients || []).forEach(i => { if (i.id) byId[i.id] = i; });
+      const chips = step.ingredientRefs
+        .map(id => byId[id])
+        .filter(Boolean)
+        .map(i => `<span class="ingredient-chip"><span>${i.name}</span><span class="amt">${i.amount}</span></span>`)
+        .join('');
+      if (chips) chipsHtml = `<div class="ingredient-chips">${chips}</div>`;
+    }
+
+    let extra = '';
+    if (step.timer) {
+      extra = `
+        <div class="timer-box">
+          <div id="timer-display" class="timer-display">${formatTime(step.timer)}</div>
+          <div class="timer-label" id="timer-label">Tocá empezar cuando arranques este paso</div>
+          <div class="timer-controls">
+            <button class="timer-btn primary" id="timer-toggle" onclick="toggleTimer(${step.timer})">Empezar</button>
+            <button class="timer-btn" onclick="resetTimer(${step.timer})">Reiniciar</button>
+          </div>
+        </div>`;
+    } else if (step.longStep) {
+      extra = `
+        <div class="long-step-note">
+          ${HOURGLASS_ICON}
+          <span>Paso largo de espera — no hace falta quedarse mirando el timer.</span>
+        </div>`;
+    }
+
+    main.innerHTML = `
+      <h2 class="cook-step-title">${step.title}</h2>
+      <p class="cook-step-text">${step.text}</p>
+      ${chipsHtml}
+      ${extra}
+    `;
+
+    nav.innerHTML = `
+      <button class="nav-btn prev" ${cookStepIndex === 0 ? 'disabled' : ''} onclick="prevStep()">Atrás</button>
+      <button class="nav-btn next" onclick="nextStep()">${cookStepIndex === steps.length - 1 ? 'Terminar' : 'Siguiente'}</button>
+    `;
+
+    if (step.timer) {
+      timerRemaining = step.timer;
+      timerRunning = false;
+    }
+  }
+
+  function nextStep() { cookStepIndex++; renderCookStep(); }
+  function prevStep() { if (cookStepIndex > 0) { cookStepIndex--; renderCookStep(); } }
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60).toString().padStart(2, '0');
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  function clearTimerInterval() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  }
+
+  function toggleTimer(total) {
+    const display = document.getElementById('timer-display');
+    const label = document.getElementById('timer-label');
+    const btn = document.getElementById('timer-toggle');
+    if (timerRunning) {
+      timerRunning = false;
+      clearTimerInterval();
+      btn.textContent = 'Continuar';
+      display.classList.remove('running');
+      return;
+    }
+    timerRunning = true;
+    btn.textContent = 'Pausar';
+    display.classList.add('running');
+    label.textContent = 'Corriendo…';
+    timerInterval = setInterval(() => {
+      timerRemaining--;
+      display.textContent = formatTime(Math.max(timerRemaining, 0));
+      if (timerRemaining <= 0) {
+        clearTimerInterval();
+        timerRunning = false;
+        display.classList.remove('running');
+        display.classList.add('done');
+        label.textContent = '¡Listo este paso!';
+        btn.textContent = 'Empezar';
+        playBeep();
+        if (navigator.vibrate) navigator.vibrate([200, 80, 200]);
+      }
+    }, 1000);
+  }
+
+  function resetTimer(total) {
+    clearTimerInterval();
+    timerRunning = false;
+    timerRemaining = total;
+    const display = document.getElementById('timer-display');
+    if (display) {
+      display.textContent = formatTime(total);
+      display.classList.remove('running', 'done');
+    }
+    const label = document.getElementById('timer-label');
+    if (label) label.textContent = 'Tocá empezar cuando arranques este paso';
+    const btn = document.getElementById('timer-toggle');
+    if (btn) btn.textContent = 'Empezar';
+  }
+
+  function playBeep() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = 880;
+      g.gain.setValueAtTime(0.15, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(); o.stop(ctx.currentTime + 0.6);
+    } catch (e) { /* audio not available, ignore */ }
+  }
+
+  // ---------- INIT ----------
+  (async function init() {
+    await loadRecipes();
+    renderHome();
+  })();
+</script>
+</body>
+</html>
