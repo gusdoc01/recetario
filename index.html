@@ -567,8 +567,11 @@ muffin: `<svg viewBox="0 0 100 100"><g>
   let currentRecipe = null;
   let cookStepIndex = 0;
   let timerInterval = null;
-  let timerRemaining = 0;
+  let timerRemaining = 0;   // segundos restantes (siempre recalculado desde timerEndTime)
+  let timerTotal = 0;       // duración total del paso actual, para reiniciar
+  let timerEndTime = null;  // timestamp real de fin mientras el timer corre
   let timerRunning = false;
+  let wakeLock = null;      // evita que se bloquee la pantalla con el timer corriendo
 
   // ---------- CARGA DE RECETAS (dinámica: recipes/index.json) ----------
   async function loadRecipes() {
@@ -734,8 +737,12 @@ muffin: `<svg viewBox="0 0 100 100"><g>
       <button class="nav-btn next" onclick="nextStep()">${cookStepIndex === steps.length - 1 ? 'Terminar' : 'Siguiente'}</button>
     `;
 
+    clearTimerInterval();
+    releaseWakeLock();
     if (step.timer) {
       timerRemaining = step.timer;
+      timerTotal = step.timer;
+      timerEndTime = null;
       timerRunning = false;
     }
   }
@@ -753,41 +760,79 @@ muffin: `<svg viewBox="0 0 100 100"><g>
     if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
   }
 
+  async function requestWakeLock() {
+    try {
+      if ('wakeLock' in navigator) {
+        wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', () => { wakeLock = null; });
+      }
+    } catch (e) { /* no soportado o permiso denegado: seguimos igual, solo no evitamos el bloqueo */ }
+  }
+
+  function releaseWakeLock() {
+    if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+  }
+
   function toggleTimer(total) {
     const display = document.getElementById('timer-display');
     const label = document.getElementById('timer-label');
     const btn = document.getElementById('timer-toggle');
     if (timerRunning) {
+      // Pausar: el restante real siempre se calcula contra el timestamp de fin
+      timerRemaining = Math.max(0, Math.round((timerEndTime - Date.now()) / 1000));
       timerRunning = false;
+      timerEndTime = null;
       clearTimerInterval();
+      releaseWakeLock();
       btn.textContent = 'Continuar';
       display.classList.remove('running');
       return;
     }
+    if (timerRemaining <= 0) timerRemaining = total;
+    timerTotal = total;
+    timerEndTime = Date.now() + timerRemaining * 1000;
     timerRunning = true;
+    requestWakeLock();
     btn.textContent = 'Pausar';
     display.classList.add('running');
     label.textContent = 'Corriendo…';
-    timerInterval = setInterval(() => {
-      timerRemaining--;
-      display.textContent = formatTime(Math.max(timerRemaining, 0));
-      if (timerRemaining <= 0) {
-        clearTimerInterval();
-        timerRunning = false;
-        display.classList.remove('running');
-        display.classList.add('done');
-        label.textContent = '¡Listo este paso!';
-        btn.textContent = 'Empezar';
-        playBeep();
-        if (navigator.vibrate) navigator.vibrate([200, 80, 200]);
-      }
-    }, 1000);
+    clearTimerInterval();
+    timerInterval = setInterval(updateTimerDisplay, 250);
+    updateTimerDisplay();
+  }
+
+  function updateTimerDisplay() {
+    if (!timerRunning || timerEndTime === null) return;
+    const display = document.getElementById('timer-display');
+    if (!display) { clearTimerInterval(); return; } // cambiamos de paso/pantalla
+    timerRemaining = Math.max(0, Math.round((timerEndTime - Date.now()) / 1000));
+    display.textContent = formatTime(timerRemaining);
+    if (timerRemaining <= 0) finishTimer();
+  }
+
+  function finishTimer() {
+    clearTimerInterval();
+    releaseWakeLock();
+    timerRunning = false;
+    timerEndTime = null;
+    timerRemaining = 0;
+    const display = document.getElementById('timer-display');
+    const label = document.getElementById('timer-label');
+    const btn = document.getElementById('timer-toggle');
+    if (display) { display.textContent = formatTime(0); display.classList.remove('running'); display.classList.add('done'); }
+    if (label) label.textContent = '¡Listo este paso!';
+    if (btn) btn.textContent = 'Empezar';
+    playBeep();
+    if (navigator.vibrate) navigator.vibrate([200, 80, 200]);
   }
 
   function resetTimer(total) {
     clearTimerInterval();
+    releaseWakeLock();
     timerRunning = false;
+    timerEndTime = null;
     timerRemaining = total;
+    timerTotal = total;
     const display = document.getElementById('timer-display');
     if (display) {
       display.textContent = formatTime(total);
@@ -798,6 +843,16 @@ muffin: `<svg viewBox="0 0 100 100"><g>
     const btn = document.getElementById('timer-toggle');
     if (btn) btn.textContent = 'Empezar';
   }
+
+  // Si volvemos a la app (se desbloqueó el teléfono, se volvió de otra app) con el
+  // timer corriendo, recalculamos al toque contra el timestamp real y recuperamos
+  // el wake lock si se perdió al pasar a segundo plano.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && timerRunning) {
+      updateTimerDisplay();
+      if (timerRunning) requestWakeLock();
+    }
+  });
 
   function playBeep() {
     try {
