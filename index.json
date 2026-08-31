@@ -40,5 +40,12 @@
     "title": "Galletitas Caseras para Perro",
     "subtitle": "Calabaza y avena · crocantes · sin azúcar, sal agregada ni ingredientes tóxicos",
     "servings": "~20 galletitas chicas"
+  },
+  {
+    "id": "muffins-gouda-bacon",
+    "icon": "muffin",
+    "title": "Muffins de Gouda con Bacon",
+    "subtitle": "Muffins salados con manzana verde, gouda, bacon dorado y cerveza",
+    "servings": "12 muffins (molde estándar de 12 cavidades)"
   }
 ]
