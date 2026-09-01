@@ -708,6 +708,10 @@ muffin: `<svg viewBox="0 0 100 100"><g>
 
     let extra = '';
     if (step.timer) {
+      // Al volver de Atajos, esta URL hace que la web se reabra directo en este
+      // mismo paso (ver resumeCookingFromURL en el init), no en la pantalla de inicio.
+      const returnUrl = `${location.origin}${location.pathname}?recipe=${encodeURIComponent(currentRecipe.id)}&step=${cookStepIndex}`;
+      const shortcutUrl = `shortcuts://x-callback-url/run-shortcut?name=Timer%20Receta&amp;input=text&amp;text=${step.timer}&amp;x-success=${encodeURIComponent(returnUrl)}&amp;x-cancel=${encodeURIComponent(returnUrl)}`;
       extra = `
         <div class="timer-box">
           <div id="timer-display" class="timer-display">${formatTime(step.timer)}</div>
@@ -716,7 +720,7 @@ muffin: `<svg viewBox="0 0 100 100"><g>
             <button class="timer-btn primary" id="timer-toggle" onclick="toggleTimer(${step.timer})">Empezar</button>
             <button class="timer-btn" onclick="resetTimer(${step.timer})">Reiniciar</button>
           </div>
-          <a class="timer-btn" style="margin-top:8px;width:100%;box-sizing:border-box;display:block;text-align:center;text-decoration:none" href="shortcuts://run-shortcut?name=Timer%20Receta&amp;input=text&amp;text=${step.timer}">⏰ Timer del sistema (Atajos)</a>
+          <a class="timer-btn" style="margin-top:8px;width:100%;box-sizing:border-box;display:block;text-align:center;text-decoration:none" href="${shortcutUrl}">⏰ Timer del sistema (Atajos)</a>
         </div>`;
     } else if (step.longStep) {
       extra = `
@@ -868,10 +872,29 @@ muffin: `<svg viewBox="0 0 100 100"><g>
     } catch (e) { /* audio not available, ignore */ }
   }
 
+  // Si volvemos de Atajos (ver el link "Timer del sistema"), la URL trae
+  // ?recipe=<id>&step=<índice>: saltamos directo a ese paso en modo cocina
+  // en vez de mostrar la pantalla de inicio.
+  async function resumeCookingFromURL() {
+    const params = new URLSearchParams(location.search);
+    const rid = params.get('recipe');
+    if (!rid) return;
+    const stepIdx = parseInt(params.get('step') || '0', 10);
+    await openRecipe(rid);
+    if (currentRecipe) {
+      cookStepIndex = Number.isFinite(stepIdx) && stepIdx >= 0 ? stepIdx : 0;
+      showScreen('cook');
+      renderCookStep();
+    }
+    // Limpiamos la URL para que un refresh manual no vuelva a saltar al mismo paso
+    history.replaceState({}, '', location.pathname);
+  }
+
   // ---------- INIT ----------
   (async function init() {
     await loadRecipes();
     renderHome();
+    await resumeCookingFromURL();
   })();
 </script>
 </body>
