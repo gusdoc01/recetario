@@ -4,26 +4,25 @@
   "title": "Costillas de Cerdo BBQ al Horno",
   "subtitle": "Cocción lenta en horno suave, con salsa barbacoa y control del fondo de cocción",
   "servings": "4-6 personas",
-  "totalTime": "~3 h 20 min",
+  "time": "~3 h 20 min",
   "oven": "160 °C",
-  "source": "@majogm (Twitter/X)",
   "ingredients": [
-    { "id": "costillar", "name": "Costillar de cerdo (ribs)", "quantity": "1 placa (~1,5 kg)" },
-    { "id": "sal", "name": "Sal fina", "quantity": "a gusto" },
-    { "id": "pimienta", "name": "Pimienta negra", "quantity": "a gusto" },
-    { "id": "salsa-bbq-1", "name": "Salsa barbacoa", "quantity": "300 g aprox. (generoso)" },
-    { "id": "salsa-bbq-2", "name": "Salsa barbacoa (para la vuelta)", "quantity": "a gusto, extra" },
-    { "id": "agua", "name": "Agua", "quantity": "a demanda, para el fondo" }
+    { "id": "costillar", "name": "Costillar de cerdo (ribs)", "amount": "1 placa (~1,5 kg)" },
+    { "id": "sal", "name": "Sal fina", "amount": "a gusto" },
+    { "id": "pimienta", "name": "Pimienta negra", "amount": "a gusto" },
+    { "id": "salsa-bbq-1", "name": "Salsa barbacoa", "amount": "300 g aprox. (generoso)" },
+    { "id": "salsa-bbq-2", "name": "Salsa barbacoa (para la vuelta)", "amount": "a gusto, extra" },
+    { "id": "agua", "name": "Agua", "amount": "a demanda, para el fondo" }
   ],
+  "notes": "Lo que abunda no daña: no escatimar en salsa barbacoa, tanto al principio como en la vuelta a mitad de cocción.",
   "steps": [
     { "title": "Preparar la carne", "text": "Apoyar el costillar con los huesos hacia arriba. En la parte de abajo, donde se ven las costillas, retirar con la punta de un cuchillo la membrana/pielcita que las cubre. No es imprescindible, pero sale fácil y después permite que los huesos salgan limpios.", "ingredientRefs": ["costillar"] },
     { "title": "Condimentar", "text": "Del lado de la carne, salpimentar. Pincelar con salsa barbacoa de manera generosa: después se nota.", "ingredientRefs": ["sal", "pimienta", "salsa-bbq-1"] },
     { "title": "Armar para el horno", "text": "Dos opciones, ambas válidas: (A) todo el costillar en una fuente, huesos hacia abajo, tapado con papel aluminio; o (B) cada costilla por separado, huesos hacia arriba, envuelta individualmente en aluminio. El horno es igual de suave en ambos casos." },
-    { "title": "Primera cocción", "text": "Hornear a horno suave, unos 160 °C, tapado con aluminio, durante 2 horas.", "timerSeconds": 7200 },
-    { "title": "Glasear y continuar", "text": "Sacar la fuente del horno, agregar más salsa barbacoa y volver a tapar. Cocinar 1 hora más (3 horas de horno en total, depende del tamaño de la placa).", "ingredientRefs": ["salsa-bbq-2"], "timerSeconds": 3600 },
+    { "title": "Primera cocción", "text": "Hornear a horno suave, unos 160 °C, tapado con aluminio, durante 2 horas.", "timer": 7200 },
+    { "title": "Glasear y continuar", "text": "Sacar la fuente del horno, agregar más salsa barbacoa y volver a tapar. Cocinar 1 hora más (3 horas de horno en total, depende del tamaño de la placa).", "ingredientRefs": ["salsa-bbq-2"], "timer": 3600 },
     { "title": "Controlar el fondo", "text": "El cerdo suelta líquido y grasa: ese fondo hay que cuidarlo. Al destapar la fuente empieza a evaporarse; si se ve que se seca, agregar un poco de agua — lo mínimo necesario, para que no haga 'cric cric cric' y se queme.", "ingredientRefs": ["agua"] },
     { "title": "Dorar y terminar", "text": "A las 2 horas revisar y dejar destapado el resto de la cocción. Si se quiere, agregar más salsa barbacoa antes de terminar (lo que abunda no daña), para que quede bien glaseado." },
     { "title": "Punto de cocción", "text": "Debería estar lista a las 3 horas, pero depende del tamaño. Probar cortando con una cuchara, o tirando de un huesito: tiene que soltarse fácil y salir limpio (más fácil en la opción B, donde los huesos quedan a la vista)." }
-  ],
-  "notes": "Lo que abunda no daña: no escatimar en salsa barbacoa, tanto al principio como en la vuelta a mitad de cocción."
+  ]
 }
