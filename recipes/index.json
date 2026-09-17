@@ -47,5 +47,17 @@
     "title": "Muffins de Gouda con Bacon",
     "subtitle": "Muffins salados con manzana verde, gouda, bacon dorado y cerveza",
     "servings": "12 muffins (molde estándar de 12 cavidades)"
+  },
+  { "id": "costillas-bbq-al-horno", 
+    "icon": "ribs", 
+    "title": "Costillas de Cerdo BBQ al Horno", 
+    "subtitle": "Cocción lenta en horno suave, con salsa barbacoa y control del fondo de cocción", 
+    "servings": "4-6 personas" 
+  },
+  { "id": "coleslaw", 
+    "icon": "coleslaw", 
+    "title": "Coleslaw", 
+    "subtitle": "Ensalada de repollo y zanahoria con aderezo cremoso de mostaza", 
+    "servings": "6-8 como guarnición" 
   }
 ]
