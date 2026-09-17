@@ -4,23 +4,21 @@
   "title": "Coleslaw",
   "subtitle": "Ensalada de repollo y zanahoria con aderezo cremoso de mostaza",
   "servings": "6-8 como guarnición",
-  "totalTime": "20 min + reposo",
-  "oven": null,
-  "source": "@majogm (Twitter/X)",
+  "time": "20 min + reposo",
   "ingredients": [
-    { "id": "vinagre-manzana", "name": "Vinagre de manzana", "quantity": "30 cc (2 cdas)" },
-    { "id": "mayonesa", "name": "Mayonesa", "quantity": "100 g (+ a gusto para ajustar)" },
-    { "id": "mostaza", "name": "Mostaza", "quantity": "1 cda (~15 g)" },
-    { "id": "azucar", "name": "Azúcar", "quantity": "1 cda (12,5 g)" },
-    { "id": "repollo", "name": "Repollo, cortado fino", "quantity": "1/2 repollo mediano aprox." },
-    { "id": "zanahoria", "name": "Zanahoria, en juliana", "quantity": "2 unidades" }
+    { "id": "vinagre-manzana", "name": "Vinagre de manzana", "amount": "30 cc (2 cdas)" },
+    { "id": "mayonesa", "name": "Mayonesa", "amount": "100 g (+ a gusto para ajustar)" },
+    { "id": "mostaza", "name": "Mostaza", "amount": "1 cda (~15 g)" },
+    { "id": "azucar", "name": "Azúcar", "amount": "1 cda (12,5 g)" },
+    { "id": "repollo", "name": "Repollo, cortado fino", "amount": "1/2 repollo mediano aprox." },
+    { "id": "zanahoria", "name": "Zanahoria, en juliana", "amount": "2 unidades" }
   ],
+  "notes": "Se asienta y mejora con el reposo: ideal prepararla la mañana para la noche, o el día anterior.",
   "steps": [
     { "title": "Preparar el aderezo", "text": "Mezclar el vinagre de manzana con la mayonesa, la mostaza y el azúcar hasta integrar.", "ingredientRefs": ["vinagre-manzana", "mayonesa", "mostaza", "azucar"] },
     { "title": "Ajustar el sabor", "text": "Probar. Si tiene demasiado gusto a mostaza, azúcar o vinagre, agregar más mayonesa hasta equilibrar." },
     { "title": "Cortar las verduras", "text": "Cortar el repollo bien fino y la zanahoria en juliana.", "ingredientRefs": ["repollo", "zanahoria"] },
     { "title": "Mezclar", "text": "Combinar el repollo y la zanahoria con el aderezo hasta que quede todo bien integrado." },
     { "title": "Reposar", "text": "A diferencia de una ensalada común que se prepara al momento, conviene armar la coleslaw unas horas antes y dejarla en la heladera para que se asiente." }
-  ],
-  "notes": "Se asienta y mejora con el reposo: ideal prepararla la mañana para la noche, o el día anterior."
+  ]
 }
