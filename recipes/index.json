@@ -60,4 +60,12 @@
     "subtitle": "Ensalada de repollo y zanahoria con aderezo cremoso de mostaza", 
     "servings": "6-8 como guarnición" 
   }
+  ,
+{
+  "id": "pan-de-campo",
+  "icon": "pan",
+  "title": "Pan de Campo",
+  "subtitle": "Larga fermentación · 72% hidratación · cocido en olla de hierro fundido",
+  "servings": "2 panes grandes (de 1 kg de harina)"
+}
 ]
