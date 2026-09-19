@@ -1,0 +1,38 @@
+      ]
+    },
+    {
+      "title": "Primeros pliegues",
+      "text": "Durante las primeras 2 horas, pliega la masa cada 25 minutos aproximadamente (5-6 pliegues en total).",
+      "timer": 7200
+    },
+    {
+      "title": "Fermentación en bloque",
+      "text": "Dejá fermentar tapada hasta que la masa duplique o triplique su volumen.",
+      "longStep": true
+    },
+    {
+      "title": "Formado",
+      "text": "Dividí la masa y colocala en bannetones enharinados, o en bowls forrados con un repasador bien enharinado."
+    },
+    {
+      "title": "Punteo final",
+      "text": "Dejá reposar la masa ya formada antes de hornear.",
+      "timer": 3600
+    },
+    {
+      "title": "Precalentar con la olla",
+      "text": "Precalentá el horno a 240°C con la olla de hierro fundido tapada en su interior.",
+      "timer": 2100
+    },
+    {
+      "title": "Hornear tapado",
+      "text": "Colocá la masa dentro de la olla caliente. Tapá y horneá.",
+      "timer": 1200
+    },
+    {
+      "title": "Hornear destapado",
+      "text": "Destapá la olla y horneá hasta dorar.",
+      "timer": 1200
+    }
+  ]
+}
