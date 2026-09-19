@@ -1,3 +1,43 @@
+{
+  "id": "pan-de-campo",
+  "icon": "pan",
+  "title": "Pan de Campo",
+  "subtitle": "Larga fermentación · 72% hidratación · cocido en olla de hierro fundido",
+  "servings": "2 panes grandes (de 1 kg de harina)",
+  "time": "~8 h de fermentación (2 h de pliegues + 5 h en bloque + 1 h de punteo) + 40 min de horno",
+  "oven": "240°C, en olla de hierro fundido tapada",
+  "ingredients": [
+    {
+      "name": "Harina 0000 (o 000/floja)",
+      "amount": "1000 g",
+      "id": "harina"
+    },
+    {
+      "name": "Levadura seca",
+      "amount": "3 g",
+      "id": "levadura"
+    },
+    {
+      "name": "Sal",
+      "amount": "22 g",
+      "id": "sal"
+    },
+    {
+      "name": "Agua a 30°C (24°C en verano)",
+      "amount": "720 cc",
+      "id": "agua"
+    }
+  ],
+  "notes": "Hidratación ≈72%, sal ≈2,2%, levadura ≈0,3%. Pesá los ingredientes con precisión. Usá termómetro para controlar la temperatura del agua y de la masa: define la velocidad de fermentación. El pan está listo cuando la temperatura interna llega a 90°C.",
+  "steps": [
+    {
+      "title": "Mezclado",
+      "text": "Combiná todos los ingredientes en un bowl grande hasta integrar. No hace falta amasar.",
+      "ingredientRefs": [
+        "harina",
+        "levadura",
+        "sal",
+        "agua"
       ]
     },
     {
@@ -35,4 +75,4 @@
       "timer": 1200
     }
   ]
-}
+}  
