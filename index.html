@@ -85,6 +85,45 @@
   }
   .card-meta{ font-size: 12.5px; color: var(--ink-soft); margin:0; }
 
+  /* ---------- HOME: lista agrupada ---------- */
+  .list{ padding: 6px 20px 12px; }
+  .group-label{
+    font-size: 12px; font-weight: 800; letter-spacing: .09em;
+    color: var(--sage-deep); margin: 18px 2px 8px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .group-label .count{
+    font-weight: 700; letter-spacing: 0; color: var(--ink-soft);
+    background: var(--paper-alt); border-radius: var(--radius-pill);
+    padding: 1px 8px; font-size: 11px;
+  }
+  .group{
+    background:#fff; border:1px solid var(--line); border-radius: 16px; overflow:hidden;
+  }
+  .row{
+    width:100%; display:flex; align-items:center; gap: 12px;
+    padding: 9px 12px; text-align:left;
+    border-bottom: 1px solid var(--line);
+  }
+  .group .row:last-child{ border-bottom:none; }
+  .row:active{ background: var(--paper-alt); }
+  .row-icon{
+    width: 46px; height: 46px; flex-shrink:0; border-radius: 12px;
+    background: var(--paper-alt); display:flex; align-items:center; justify-content:center;
+  }
+  .row-icon svg{ width: 78%; height: 78%; }
+  .row-text{ flex:1; min-width:0; }
+  .row-title{
+    font-family: var(--font-display); font-weight: 600; font-size: 16px;
+    line-height: 1.2; margin:0 0 2px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .row-meta{
+    font-size: 12.5px; color: var(--ink-soft); margin:0;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .row-chev{ width:16px; height:16px; flex-shrink:0; color: var(--ink-soft); }
+
   .empty-state{
     margin: 24px 20px; padding: 28px 20px;
     border: 1px dashed var(--line); border-radius: var(--radius-card);
@@ -263,7 +302,7 @@
       <h1>Recetario</h1>
       <p id="home-sub">Elegí una receta para empezar.</p>
     </div>
-    <div id="grid" class="grid"></div>
+    <div id="grid" class="list"></div>
   </div>
 
   <!-- DETAIL -->
@@ -373,7 +412,38 @@ muffin: `<svg viewBox="0 0 100 100"><g>
       <circle cx="24" cy="59" r="10.5"/>
       <circle cx="76" cy="39" r="10.5"/>
       <circle cx="76" cy="59" r="10.5"/>
-    </g></svg>`
+    </g></svg>`,
+    pita: `<svg viewBox="0 0 100 100"><g>
+      <ellipse cx="50" cy="58" rx="38" ry="26" fill="#E8C98C" stroke="#B8934A" stroke-width="2.5"/>
+      <path d="M16 54 Q50 30 84 54" fill="#F2DDB0" stroke="#B8934A" stroke-width="2.2"/>
+      <ellipse cx="36" cy="64" rx="5" ry="3" fill="#C9954A" opacity="0.7"/>
+      <ellipse cx="58" cy="70" rx="6" ry="3.2" fill="#C9954A" opacity="0.6"/>
+      <ellipse cx="68" cy="58" rx="4" ry="2.4" fill="#C9954A" opacity="0.6"/>
+    </g></svg>`,
+    pan: `<svg viewBox="0 0 100 100"><g>
+      <path d="M12 66 Q12 30 50 30 Q88 30 88 66 Q88 76 78 76 H22 Q12 76 12 66 Z" fill="#C98A45" stroke="#94602A" stroke-width="2.5"/>
+      <path d="M30 46 Q38 40 46 46" fill="none" stroke="#F2DDB0" stroke-width="3" stroke-linecap="round"/>
+      <path d="M44 42 Q52 36 60 42" fill="none" stroke="#F2DDB0" stroke-width="3" stroke-linecap="round"/>
+      <path d="M58 46 Q66 40 74 46" fill="none" stroke="#F2DDB0" stroke-width="3" stroke-linecap="round"/>
+    </g></svg>`,
+    ribs: `<svg viewBox="0 0 100 100"><g>
+      <path d="M16 36 Q50 24 84 36 L80 72 Q50 82 20 72 Z" fill="#9E3B24" stroke="#6E2414" stroke-width="2.5"/>
+      <g stroke="#F1E3C8" stroke-width="5" stroke-linecap="round">
+        <path d="M30 26 L32 80"/><path d="M44 22 L45 83"/><path d="M58 22 L57 83"/><path d="M72 26 L69 80"/>
+      </g>
+      <path d="M22 50 Q50 58 78 50" fill="none" stroke="#C4642F" stroke-width="2" opacity="0.8"/>
+    </g></svg>`,
+    coleslaw: `<svg viewBox="0 0 100 100"><g>
+      <path d="M12 50 H88 Q86 82 50 84 Q14 82 12 50 Z" fill="#FFFFFF" stroke="#B8B2A4" stroke-width="2.5"/>
+      <ellipse cx="50" cy="50" rx="38" ry="9" fill="#EEF3DE" stroke="#B8B2A4" stroke-width="2"/>
+      <g stroke-linecap="round" stroke-width="3">
+        <path d="M24 49 Q32 44 40 48" stroke="#9BC07A" fill="none"/>
+        <path d="M44 46 Q52 42 60 47" stroke="#E08A3A" fill="none"/>
+        <path d="M60 51 Q68 46 76 50" stroke="#9BC07A" fill="none"/>
+        <path d="M34 53 Q44 50 52 54" stroke="#B57AC4" fill="none"/>
+        <path d="M54 54 Q62 51 70 55" stroke="#E08A3A" fill="none"/>
+      </g>
+    </g></svg>`,
   };
 
   const CHECK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#4B7F52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
@@ -560,6 +630,9 @@ muffin: `<svg viewBox="0 0 100 100"><g>
     }
   ];
 
+  // ---------- CATEGORÍAS (orden de aparición en el home) ----------
+  const CATEGORY_ORDER = ['PANIFICADOS', 'CARNES', 'VERDURAS Y ENSALADAS', 'MASCOTAS'];
+
   // ---------- STATE ----------
   const RECIPES_BASE = 'recipes/'; // carpeta con index.json + un .json por receta
   let recipes = [];               // metadata liviana (grilla): id, icon, title, subtitle, servings
@@ -581,7 +654,7 @@ muffin: `<svg viewBox="0 0 100 100"><g>
       recipes = await res.json();
     } catch (e) {
       console.warn('No se pudo cargar recipes/index.json, uso datos de reserva.', e);
-      recipes = SEED_RECIPES_FALLBACK.map(r => ({ id: r.id, icon: r.icon, title: r.title, subtitle: r.subtitle, servings: r.servings }));
+      recipes = SEED_RECIPES_FALLBACK.map(r => ({ id: r.id, icon: r.icon, title: r.title, subtitle: r.subtitle, servings: r.servings, category: r.category }));
       SEED_RECIPES_FALLBACK.forEach(r => { recipeCache[r.id] = r; });
     }
   }
@@ -596,15 +669,32 @@ muffin: `<svg viewBox="0 0 100 100"><g>
       grid.insertAdjacentHTML('afterend', `<div class="empty-state">Pedime en el chat que sume una receta y va a aparecer acá.</div>`);
       return;
     }
-    grid.innerHTML = recipes.map(r => `
-      <button class="card" onclick="openRecipe('${r.id}')">
-        <div class="card-icon">${ICONS[r.icon] || ICONS.tortilla}</div>
-        <div class="card-body">
-          <p class="card-title">${r.title}</p>
-          <p class="card-meta">${r.servings}</p>
-        </div>
-      </button>
-    `).join('');
+    // Agrupar por categoría (campo "category" en index.json). Sin categoría → OTRAS.
+    const groups = {};
+    recipes.forEach(r => {
+      const cat = (r.category || 'OTRAS').toUpperCase();
+      (groups[cat] = groups[cat] || []).push(r);
+    });
+    const known = CATEGORY_ORDER.filter(c => groups[c]);
+    const extra = Object.keys(groups).filter(c => !CATEGORY_ORDER.includes(c) && c !== 'OTRAS').sort();
+    const order = [...known, ...extra, ...(groups['OTRAS'] ? ['OTRAS'] : [])];
+    const chev = `<svg class="row-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>`;
+    grid.innerHTML = order.map(cat => {
+      const items = groups[cat].slice().sort((a, b) => a.title.localeCompare(b.title, 'es'));
+      return `
+      <div class="group-label">${cat}<span class="count">${items.length}</span></div>
+      <div class="group">
+        ${items.map(r => `
+        <button class="row" onclick="openRecipe('${r.id}')">
+          <div class="row-icon">${ICONS[r.icon] || ICONS.tortilla}</div>
+          <div class="row-text">
+            <p class="row-title">${r.title}</p>
+            <p class="row-meta">${r.servings}</p>
+          </div>
+          ${chev}
+        </button>`).join('')}
+      </div>`;
+    }).join('');
   }
 
   // ---------- RENDER: DETAIL ----------
