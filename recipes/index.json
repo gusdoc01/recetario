@@ -4,76 +4,87 @@
     "icon": "pizza",
     "title": "Pizza Napoletana",
     "subtitle": "55% hidratación · 24h de frío · horno casero con piedra",
-    "servings": "6 panetti (~260 g)"
+    "servings": "6 panetti (~260 g)",
+    "category": "PANIFICADOS"
   },
   {
     "id": "tortillas-rapiditas",
     "icon": "tortilla",
     "title": "Tortillas de Trigo Rapiditas",
     "subtitle": "Receta de @LaGuerrillaFood · dos harinas · sin vinagre ni polvo de hornear",
-    "servings": "22 a 25 tortillas de 40 g"
+    "servings": "22 a 25 tortillas de 40 g",
+    "category": "PANIFICADOS"
   },
   {
     "id": "ny-bagels",
     "icon": "bagel",
     "title": "NY Bagels",
     "subtitle": "Esponja tipo poolish · escaldados en agua con bicarbonato y miel",
-    "servings": "12 bagels"
+    "servings": "12 bagels",
+    "category": "PANIFICADOS"
   },
   {
     "id": "bunuelos-acelga-avena",
     "icon": "bunuelo",
     "title": "Buñuelos de Acelga y Avena",
     "subtitle": "Versión liviana · avena en lugar de harina · fritos o al horno",
-    "servings": "4 porciones (~12 buñuelos)"
+    "servings": "4 porciones (~12 buñuelos)",
+    "category": "VERDURAS Y ENSALADAS"
   },
   {
     "id": "bunuelos-acelga-guerrilla",
     "icon": "bunuelo2",
     "title": "Buñuelos de Acelga",
     "subtitle": "Receta de @LaGuerrillaFood · acelga hervida y picada a cuchillo · fritos",
-    "servings": "1 paquete de acelga (varias porciones)"
+    "servings": "1 paquete de acelga (varias porciones)",
+    "category": "VERDURAS Y ENSALADAS"
   },
   {
     "id": "galletitas-perro",
     "icon": "dog",
     "title": "Galletitas Caseras para Perro",
     "subtitle": "Calabaza y avena · crocantes · sin azúcar, sal agregada ni ingredientes tóxicos",
-    "servings": "~20 galletitas chicas"
+    "servings": "~20 galletitas chicas",
+    "category": "MASCOTAS"
   },
   {
     "id": "muffins-gouda-bacon",
     "icon": "muffin",
     "title": "Muffins de Gouda con Bacon",
     "subtitle": "Muffins salados con manzana verde, gouda, bacon dorado y cerveza",
-    "servings": "12 muffins (molde estándar de 12 cavidades)"
+    "servings": "12 muffins (molde estándar de 12 cavidades)",
+    "category": "PANIFICADOS"
   },
-  { "id": "costillas-bbq-al-horno", 
-    "icon": "ribs", 
-    "title": "Costillas de Cerdo BBQ al Horno", 
-    "subtitle": "Cocción lenta en horno suave, con salsa barbacoa y control del fondo de cocción", 
-    "servings": "4-6 personas" 
+  {
+    "id": "costillas-bbq-al-horno",
+    "icon": "ribs",
+    "title": "Costillas de Cerdo BBQ al Horno",
+    "subtitle": "Cocción lenta en horno suave, con salsa barbacoa y control del fondo de cocción",
+    "servings": "4-6 personas",
+    "category": "CARNES"
   },
-  { "id": "coleslaw", 
-    "icon": "coleslaw", 
-    "title": "Coleslaw", 
-    "subtitle": "Ensalada de repollo y zanahoria con aderezo cremoso de mostaza", 
-    "servings": "6-8 como guarnición" 
+  {
+    "id": "coleslaw",
+    "icon": "coleslaw",
+    "title": "Coleslaw",
+    "subtitle": "Ensalada de repollo y zanahoria con aderezo cremoso de mostaza",
+    "servings": "6-8 como guarnición",
+    "category": "VERDURAS Y ENSALADAS"
+  },
+  {
+    "id": "pan-de-campo",
+    "icon": "pan",
+    "title": "Pan de Campo",
+    "subtitle": "Larga fermentación · 72% hidratación · cocido en olla de hierro fundido",
+    "servings": "2 panes grandes (de 1 kg de harina)",
+    "category": "PANIFICADOS"
+  },
+  {
+    "id": "pan-arabe",
+    "icon": "pita",
+    "title": "Pan Árabe",
+    "subtitle": "Receta de @majogm · pan chato con bolsillo de aire · cocido en sartén",
+    "servings": "16 panes grandes",
+    "category": "PANIFICADOS"
   }
-  ,
-{
-  "id": "pan-de-campo",
-  "icon": "pan",
-  "title": "Pan de Campo",
-  "subtitle": "Larga fermentación · 72% hidratación · cocido en olla de hierro fundido",
-  "servings": "2 panes grandes (de 1 kg de harina)"
-}
-  ,
-{
-  "id": "pan-arabe",
-  "icon": "pita",
-  "title": "Pan Árabe",
-  "subtitle": "Receta de @majogm · pan chato con bolsillo de aire · cocido en sartén",
-  "servings": "16 panes grandes"
-}
 ]
