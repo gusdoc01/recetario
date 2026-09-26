@@ -1,0 +1,55 @@
+{
+  "id": "pan-arabe",
+  "icon": "pita",
+  "title": "Pan Árabe",
+  "subtitle": "Receta de @majogm · pan chato con bolsillo de aire · cocido en sartén",
+  "servings": "16 panes grandes",
+  "time": "40 min + 20 min de leudado + cocción",
+  "oven": "Sartén, fuego medio, 3 min por lado",
+  "ingredients": [
+    { "name": "Harina 000", "amount": "1000 g", "id": "harina" },
+    { "name": "Levadura seca", "amount": "10 g", "id": "levadura" },
+    { "name": "Sal fina", "amount": "2 cdas postre (~24 g)", "id": "sal" },
+    { "name": "Agua tibia", "amount": "650 cc", "id": "agua" }
+  ],
+  "notes": "Hidratación 65%, sal ≈2,4%, levadura 1%. Pan árabe y pan pita son lo mismo. El pan se infla por el vapor al cocinarse del segundo lado: si no infla, revisar que la sartén esté bien caliente y el disco no muy grueso. Relleno favorito de la autora: gyros de cordero con tzatziki.",
+  "steps": [
+    {
+      "title": "Amasá",
+      "text": "Poner todo en la batidora con gancho (o corona en la mesada: sal a los costados, levadura y agua en el centro). Amasar hasta que la masa se despegue de los bordes o de las manos.",
+      "ingredientRefs": ["harina", "levadura", "sal", "agua"]
+    },
+    {
+      "title": "Primer leudado",
+      "text": "Pasar la masa a un bowl, tapar y dejar leudar.",
+      "timer": 2400
+    },
+    {
+      "title": "Dividí",
+      "text": "Volcar la masa, desgasificar con los dedos y dividir en 8 partes iguales, y cada una en dos: 16 bollitos (~100 g)."
+    },
+    {
+      "title": "Segundo leudado",
+      "text": "Dejar los bollitos tapados hasta que vuelvan a leudar.",
+      "timer": 1200
+    },
+    {
+      "title": "Formá",
+      "text": "Aplastar cada bollito con palote o a mano para darle forma de disco."
+    },
+    {
+      "title": "Primer lado",
+      "text": "Sartén a fuego medio, apenas aceitada (un papel embebido en aceite alcanza). Poner un pan y cocinar.",
+      "timer": 180
+    },
+    {
+      "title": "Dar vuelta",
+      "text": "Girar el pan. Al ratito se infla y se forma el bolsillo de aire.",
+      "timer": 180
+    },
+    {
+      "title": "Retirá",
+      "text": "Sacarlo de la sartén. Se desinfla enseguida, es normal: el bolsillo queda para rellenar. Repetir con el resto."
+    }
+  ]
+}
