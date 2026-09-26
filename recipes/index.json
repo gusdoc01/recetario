@@ -68,4 +68,12 @@
   "subtitle": "Larga fermentación · 72% hidratación · cocido en olla de hierro fundido",
   "servings": "2 panes grandes (de 1 kg de harina)"
 }
+  ,
+{
+  "id": "pan-arabe",
+  "icon": "pita",
+  "title": "Pan Árabe",
+  "subtitle": "Receta de @majogm · pan chato con bolsillo de aire · cocido en sartén",
+  "servings": "16 panes grandes"
+}
 ]
